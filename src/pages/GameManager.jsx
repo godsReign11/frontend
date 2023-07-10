@@ -1,5 +1,5 @@
 const GameManager = () => {
-  return <h1>GameManager</h1>;
+  return <div></div>;
 };
 
 export default GameManager;
