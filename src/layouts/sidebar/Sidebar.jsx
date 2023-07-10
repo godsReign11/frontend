@@ -61,7 +61,7 @@ const Sidebar = () => {
       };
 
   return (
-    <div className="flex">
+    <div className="flex sticky top-0">
       <motion.div
         ref={sidebarRef}
         variants={Nav_animation}
@@ -113,7 +113,7 @@ const Sidebar = () => {
                 </div>
                 <Link
                   className="text-red-500 py-1.5 px-3 text-xs bg-red-50 rounded-xl"
-                  to="/login"
+                  // to="/login"
                 >
                   Logout
                 </Link>
