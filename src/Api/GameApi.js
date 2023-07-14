@@ -1,4 +1,5 @@
 import { BASEAPIS } from "./BaseAPI";
+import { baseURL } from "./baseURL";
 
 export const createGameApi = {
   CreateGameForApp: (data) => {
@@ -10,9 +11,25 @@ export const createGameApi = {
     return await BASEAPIS.GETAPI("getGames");
   },
 
-  CreatePlayerForApp: (data) => {
-    console.log(data);
-    return BASEAPIS.POSTAPI(data, "createPlayer");
+  CreatePlayerForApp: async (body) => {
+    return await fetch(baseURL + "createPlayer", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: body,
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json != null) {
+          return json;
+        } else return false;
+      })
+      .catch((err) => {
+        console.log("Some error occured, please retry");
+        console.log(err);
+        return false;
+      });
   },
 
   // ChangeCouponEndDate: async (json) => {

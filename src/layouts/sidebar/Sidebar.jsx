@@ -104,14 +104,26 @@ const Sidebar = () => {
                 All Games
               </NavLink>
             </li>
+
             <li>
               <NavLink
-                to={"/player-manager"}
+                to={"/create-player"}
                 className="link"
                 activeclassname="active-link"
               >
                 <BsPerson size={23} className="min-w-max" />
-                Player Manager
+                Create Player
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={"/get-all-player"}
+                className="link"
+                activeclassname="active-link"
+              >
+                <BsPerson size={23} className="min-w-max" />
+                All Players
               </NavLink>
             </li>
           </ul>
@@ -127,6 +139,19 @@ const Sidebar = () => {
                   // to="/login"
                 >
                   Logout
+                </Link>
+              </div>
+
+              <div className="flex border-y border-slate-300 p-4 items-center justify-between">
+                <div>
+                  <p>Profile</p>
+                  <small></small>
+                </div>
+                <Link
+                  className="text-red-500 py-1.5 px-3 text-xs bg-red-50 rounded-xl"
+                  // to="/login"
+                >
+                  Settings
                 </Link>
               </div>
             </div>
