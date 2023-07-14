@@ -78,7 +78,7 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100 md:h-[68%] h-[70%]">
             <li>
-              <NavLink to={"/"} className="link" activeClassName="active-link">
+              <NavLink to={"/"} className="link" activeclassname="active-link">
                 <AiOutlineAppstore size={23} className="min-w-max" />
                 Dashboard
               </NavLink>
@@ -87,17 +87,28 @@ const Sidebar = () => {
               <NavLink
                 to={"/game-manager"}
                 className="link"
-                activeClassName="active-link"
+                activeclassname="active-link"
               >
                 <HiOutlineDatabase size={23} className="min-w-max" />
                 Game Manager
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={"/allgames"}
+                className="link"
+                activeclassname="active-link"
+              >
+                <HiOutlineDatabase size={23} className="min-w-max" />
+                All Games
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={"/player-manager"}
                 className="link"
-                activeClassName="active-link"
+                activeclassname="active-link"
               >
                 <BsPerson size={23} className="min-w-max" />
                 Player Manager
