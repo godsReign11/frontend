@@ -11,47 +11,19 @@ export default function AllGames() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const cachedData = localStorage.getItem("gamesData");
-    if (cachedData) {
-      setGameData(JSON.parse(cachedData));
-      setIsLoading(false);
-    } else {
-      getAllGamesDash();
-    }
+    getAllGamesDash();
   }, []);
 
-  useEffect(() => {
-    if (gamesData.length > 0) {
-      localStorage.setItem("gamesData", JSON.stringify(gamesData));
-    }
-  }, [gamesData]);
-
   const getAllGamesDash = () => {
-    createGameApi
-      .GetAllGames()
-      .then((data) => {
-        if (data.status_code) {
-          toast.done(data.message);
-          console.log(data.data);
-          setGameData(data.data);
-        } else {
-          toast.error(data.message);
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const handleAddRow = (newRow) => {
-    createGameApi.AddGame(newRow).then((data) => {
+    createGameApi.GetAllGames().then((data) => {
       if (data.status_code) {
-        toast.success(data.message);
-        const updatedGamesData = [...gamesData, data.data];
-        setGameData(updatedGamesData);
-        localStorage.setItem("gamesData", JSON.stringify(updatedGamesData));
+        toast.done(data.message);
+        console.log(data.data);
+        setGameData(data.data);
+        setIsLoading(false);
       } else {
         toast.error(data.message);
+        setIsLoading(false);
       }
     });
   };

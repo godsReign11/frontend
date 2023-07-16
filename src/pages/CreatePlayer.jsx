@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./All.css";
 import { createGameApi } from "../Api/GameApi";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 
-export default function CreatePlayer() {
+export default function CreateGame() {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [playerName, setPlayerName] = useState("");
@@ -69,105 +68,115 @@ export default function CreatePlayer() {
     <div className="wrapper">
       <ToastContainer />
       <div className="content-page rtl-page">
-        <div className="container-fluid">
-          <TopHead name={"Create Player"} />
+        <div className="container mx-auto">
+          <TopHead name={"Create Game"} />
 
-          {/* Usage and Limit */}
+          <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
+            <div className="flex-1">
+              <div className="card bg-white rounded-lg shadow-md p-6">
+                <div className="mb-6">
+                  <label
+                    htmlFor="gameName"
+                    className="text-lg font-medium text-gray-800 mb-1"
+                  >
+                    Player Name
+                  </label>
+                  <input
+                    type="text"
+                    id="gameName"
+                    value={playerName}
+                    required
+                    onChange={handleAllChange(setPlayerName)}
+                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    placeholder="Enter the name of the player"
+                  />
+                </div>
 
-          <div className="row mt-6">
-            <div className="col-sm-12 col-lg-16">
-              <div className="card">
-                <div className="card-body">
-                  <div className="form-row"></div>
-                  <div className="offers_div">
-                    <div>
-                      <div>
-                        <label className="offer_checkbox">Player name</label>
-                        <input
-                          type="text"
-                          value={playerName}
-                          required
-                          onChange={handleAllChange(setPlayerName)}
-                          className="offers_input"
-                          placeholder="type the name of the game"
-                        />
-                      </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="playerName"
+                    className="text-lg font-medium text-gray-800 mb-1"
+                  >
+                    Player Short Name
+                  </label>
+                  <input
+                    type="text"
+                    id="playerShortName"
+                    value={playerName}
+                    required
+                    onChange={handleAllChange(setPlayerShortName)}
+                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    placeholder="Enter the short name for the player"
+                  />
+                </div>
 
-                      <div>
-                        <label className="offer_checkbox">
-                          Player Short Name
-                        </label>
-                        <input
-                          type="text"
-                          value={playerShortName}
-                          required
-                          onChange={handleAllChange(setPlayerShortName)}
-                          className="offers_input"
-                          placeholder="type the name of the game"
-                        />
-                      </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="gameOrder"
+                    className="text-lg font-medium text-gray-800 mb-1"
+                  >
+                    Set Player Category
+                  </label>
+                  <input
+                    type="text"
+                    id="playerCategory"
+                    value={playerCategory}
+                    onChange={handleAllChange(setPlayerCategory)}
+                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    placeholder="Enter the player category"
+                  />
+                </div>
+              </div>
+            </div>
 
-                      <div>
-                        <label className="offer_checkbox">
-                          Player Game Category
-                        </label>
-                        <input
-                          type="text"
-                          value={playerCategory}
-                          required
-                          onChange={handleAllChange(setPlayerCategory)}
-                          className="offers_input"
-                          placeholder="type the name of the game"
-                        />
-                      </div>
+            <div className="flex-1">
+              <div className="card bg-white rounded-lg shadow-md p-6">
+                <div className="mb-6">
+                  <label
+                    htmlFor="gameURL"
+                    className="text-lg font-medium text-gray-800 mb-1"
+                  >
+                    Set Player Order
+                  </label>
+                  <input
+                    type="text"
+                    id="gameURL"
+                    value={playerOrder}
+                    required
+                    onChange={handleAllChange(setPlayerOrder)}
+                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    placeholder="Enter Player Order"
+                  />
+                </div>
 
-                      <div>
-                        <label className="offer_checkbox">Set Order</label>
-                        <input
-                          type="text"
-                          value={playerOrder}
-                          required
-                          onChange={handleAllChange(setPlayerOrder)}
-                          className="offers_input"
-                          placeholder="type the name of the game"
-                        />
-                      </div>
-
-                      <div className="cases_5000">
-                        <div>
-                          <label
-                            className="offer_checkbox_500"
-                            htmlFor="upload"
-                          >
-                            Set Player Image{" "}
-                          </label>
-                          <input
-                            className="cases_DESCRIPTION_500"
-                            id="file"
-                            onChange={handleFileChange}
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            name="files[]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* <textarea value={subject} placeholder='Add Subject' /> */}
-                  </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="upload"
+                    className="text-lg font-medium text-gray-800 mb-1"
+                  >
+                    Set Player Image
+                  </label>
+                  <input
+                    id="file"
+                    onChange={handleFileChange}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    name="files[]"
+                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="cases_button_div">
+          <div className="flex mt-6 gap-3">
             <button
               onClick={handleCreatePlayerData}
               className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"
             >
               Create Player
             </button>
-            {/* <button onClick={handleReset} className='cases_reset'>Reset Ticket</button> */}
           </div>
         </div>
       </div>
