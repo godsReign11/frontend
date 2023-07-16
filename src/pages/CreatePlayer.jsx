@@ -74,7 +74,7 @@ export default function CreatePlayer() {
 
           {/* Usage and Limit */}
 
-          <div className="row">
+          <div className="row mt-6">
             <div className="col-sm-12 col-lg-16">
               <div className="card">
                 <div className="card-body">
@@ -161,7 +161,10 @@ export default function CreatePlayer() {
           </div>
 
           <div className="cases_button_div">
-            <button onClick={handleCreatePlayerData} className="offers_button">
+            <button
+              onClick={handleCreatePlayerData}
+              className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"
+            >
               Create Player
             </button>
             {/* <button onClick={handleReset} className='cases_reset'>Reset Ticket</button> */}

@@ -1415,10 +1415,6 @@ legend {
   cursor: pointer;
 }
 
-.main-top-div h3:hover {
-  background-color: rgb(223, 255, 163);
-}
-
 .create-row {
   margin-top: 52px;
 }

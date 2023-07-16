@@ -1,31 +1,55 @@
-import "./All.css";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-
-import TopHead from "./TopHead";
-import { createGameApi } from "../Api/GameApi";
-import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import moment from "moment/moment";
+import { Table, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { createGameApi } from "../Api/GameApi";
+import { toast } from "react-toastify";
+import TopHead from "./TopHead";
 
 export default function AllGames() {
   const [gamesData, setGameData] = useState([]);
-
-  const handleAllChange = (setterFunction) => (e) => {
-    const { value } = e.target;
-    setterFunction(value);
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllGamesDash();
+    const cachedData = localStorage.getItem("gamesData");
+    if (cachedData) {
+      setGameData(JSON.parse(cachedData));
+      setIsLoading(false);
+    } else {
+      getAllGamesDash();
+    }
   }, []);
 
+  useEffect(() => {
+    if (gamesData.length > 0) {
+      localStorage.setItem("gamesData", JSON.stringify(gamesData));
+    }
+  }, [gamesData]);
+
   const getAllGamesDash = () => {
-    createGameApi.GetAllGames().then((data) => {
+    createGameApi
+      .GetAllGames()
+      .then((data) => {
+        if (data.status_code) {
+          toast.done(data.message);
+          console.log(data.data);
+          setGameData(data.data);
+        } else {
+          toast.error(data.message);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleAddRow = (newRow) => {
+    createGameApi.AddGame(newRow).then((data) => {
       if (data.status_code) {
-        toast.done(data.message);
-        console.log(data.data);
-        setGameData(data.data);
+        toast.success(data.message);
+        const updatedGamesData = [...gamesData, data.data];
+        setGameData(updatedGamesData);
+        localStorage.setItem("gamesData", JSON.stringify(updatedGamesData));
       } else {
         toast.error(data.message);
       }
@@ -33,11 +57,38 @@ export default function AllGames() {
   };
 
   const handleDate = (date) => {
-    const newDate = moment(date).format("DD/MM/YYYY");
-    return newDate;
+    return moment(date).format("DD/MM/YYYY");
   };
 
-  const handleReset = () => {};
+  const columns = [
+    {
+      title: "Index",
+      dataIndex: "index",
+      key: "index",
+      render: (_, record, index) => index + 1,
+    },
+    {
+      title: "Game Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: handleDate,
+    },
+    {
+      title: "Game URL",
+      dataIndex: "gameUrl",
+      key: "gameUrl",
+    },
+    {
+      title: "Game Order",
+      dataIndex: "order",
+      key: "order",
+    },
+  ];
 
   return (
     <div className="wrapper">
@@ -45,106 +96,21 @@ export default function AllGames() {
         <div className="container-fluid">
           <TopHead name={"All Games"} />
 
-          <div className="row">
-            <div className="col-sm-12 col-lg-12">
-              <div className="card">
-                <div className="card-body">
-                  <div className="offers_head">
-                    <div className="form-row"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <form>
-            <div className="row">
-              <div className="col-sm-12 col-lg-12">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="d-flex flex-wrap">
-                      {/* <div className='col'>
-                                            <label htmlFor='name'>Coupon Title</label>
-                                            <input
-                                                // onChange={(e) => setTeam(e.target.value)}
-                                                type='text'
-                                                // value={team_name}
-                                                className='form-control'
-                                                placeholder='Search By Coupon Title'
-                                            />
-                                        </div> */}
-                    </div>
-                    <div>
-                      <div className="form-row">
-                        <div className="col">
-                          <br />
-                          <label htmlFor="name"></label>
-                          <button
-                            value="search"
-                            // onClick={(e) => Filter(e)}
-                            type="button"
-                            className="btn btn-primary"
-                            // disabled={isLoading ? true : false}
-                          >
-                            Search
-                          </button>
-                          &nbsp;
-                          <input
-                            type="reset"
-                            className="btn btn-danger"
-                            onClick={handleReset}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-          <div className="row">
-            <div className="row">
-              <div className="col-sm-12 col-lg-12">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="table-editable" id="table">
-                      <div className="table-responsive">
-                        <table className="table table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th>S.No.</th>
-                              <th>Game name</th>
-                              <th>Created At</th>
-                              <th>Game URL</th>
-                              <th>Game Order</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {gamesData.length > 0 &&
-                              gamesData.map((game, i) => {
-                                return (
-                                  <tr key={i}>
-                                    <td>{++i}</td>
-                                    <td>{game.name}</td>
-                                    <td>{handleDate(game.createdAt)}</td>
-                                    <td>{game.gameUrl}</td>
-                                    <td>{game.order}</td>
-                                  </tr>
-                                );
-                              })}
-                          </tbody>
-                          )
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Edit Modal */}
-
-            {/* Edit Modale */}
-          </div>
+          {isLoading ? (
+            <Spin
+              indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+              size="large"
+              className="my-8 items-center"
+            />
+          ) : (
+            <Table
+              columns={columns}
+              dataSource={gamesData}
+              rowKey={(record) => record.id}
+              pagination={false}
+              className="table-auto mt-6"
+            />
+          )}
         </div>
       </div>
     </div>
