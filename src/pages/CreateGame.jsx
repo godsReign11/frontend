@@ -54,7 +54,7 @@ export default function CreateGame() {
         <div className="container mx-auto">
           <TopHead name={"Create Game"} />
 
-          <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
+          <div className="flex flex-col mt-6 sm:flex-row sm:space-y-0 sm:space-x-6">
             <div className="flex-1">
               <div className="card bg-white rounded-lg shadow-md p-6">
                 <div className="mb-6">
@@ -117,7 +117,7 @@ export default function CreateGame() {
             </div>
           </div>
 
-          <div className="flex mt-6 gap-3">
+          <div className="flex mt-6 gap-1">
             <button
               onClick={createGameDashboard}
               className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"

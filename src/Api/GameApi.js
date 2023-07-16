@@ -11,6 +11,10 @@ export const createGameApi = {
     return await BASEAPIS.GETAPI("getGames");
   },
 
+  GetAllPlayers: async () => {
+    return await BASEAPIS.GETAPI("getPlayerAll");
+  },
+
   CreatePlayerForApp: async (body) => {
     return await fetch(baseURL + "createPlayer", {
       method: "POST",

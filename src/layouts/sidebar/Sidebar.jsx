@@ -96,7 +96,7 @@ const Sidebar = () => {
 
             <li>
               <NavLink
-                to={"/allgames"}
+                to={"/all-games"}
                 className="link"
                 activeclassname="active-link"
               >
@@ -118,7 +118,7 @@ const Sidebar = () => {
 
             <li>
               <NavLink
-                to={"/get-all-player"}
+                to={"/all-players"}
                 className="link"
                 activeclassname="active-link"
               >

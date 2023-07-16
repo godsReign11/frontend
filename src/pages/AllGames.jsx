@@ -78,7 +78,7 @@ export default function AllGames() {
             <Table
               columns={columns}
               dataSource={gamesData}
-              rowKey={(record) => record.id}
+              rowKey={(players) => players.id}
               pagination={false}
               className="table-auto mt-6"
             />
