@@ -90,7 +90,7 @@ const Sidebar = () => {
                 activeclassname="active-link"
               >
                 <HiOutlineDatabase size={23} className="min-w-max" />
-                Game Manager
+                Create Game
               </NavLink>
             </li>
 
