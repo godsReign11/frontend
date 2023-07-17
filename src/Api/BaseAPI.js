@@ -47,6 +47,30 @@ export const BASEAPIS = {
       });
   },
 
+  POSTAPIFORMDATA: async (jsonbody, url) => {
+    console.log(jsonbody);
+    console.log(url);
+    return await fetch(baseURL + url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonbody,
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json != null) {
+          return json;
+        } else return false;
+      })
+      .catch((err) => {
+        console.log("Some error occured, please retry");
+        console.log(err);
+        return false;
+      });
+  },
+
   DELETEAPI: async (json, url) => {
     return await fetch(baseURL + url, {
       method: "DELETE",

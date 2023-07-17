@@ -6,6 +6,7 @@ import CreateGame from "./pages/CreateGame";
 import AllGames from "./pages/AllGames";
 import CreatePlayer from "./pages/CreatePlayer";
 import AllPlayerList from "./pages/AllPlayerList";
+import CreateContest from "./pages/CreateContest";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/create-player" element={<CreatePlayer />} />
         <Route path="/all-players" element={<AllPlayerList />} />
+        <Route path="/create-contest" element={<CreateContest />} />
         {/* <Route path="/settings" element={<Settings />} /> */}
         {/* <Route path="/build/:bID" element={<Build />} />
         <Route path="/analytics/:aID" element={<Analytics />} /> */}

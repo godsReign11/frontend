@@ -69,7 +69,7 @@ export default function CreateGame() {
       <ToastContainer />
       <div className="content-page rtl-page">
         <div className="container mx-auto">
-          <TopHead name={"Create Game"} />
+          <TopHead name={"Create Player"} />
 
           <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
             <div className="flex-1">
