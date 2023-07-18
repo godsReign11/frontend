@@ -70,7 +70,11 @@ export default function CreateGame() {
                     value={gameName}
                     required
                     onChange={handleAllChange(setGameName)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border ${
+                      inputError && gameName === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
                     placeholder="Enter the name of the game"
                   />
                 </div>
@@ -87,7 +91,11 @@ export default function CreateGame() {
                     id="gameOrder"
                     value={gameOrder}
                     onChange={handleAllChange(setGameOrder)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border ${
+                      inputError && gameOrder === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
                     placeholder="Enter the game order"
                   />
                 </div>
@@ -109,7 +117,11 @@ export default function CreateGame() {
                     value={gameURL}
                     required
                     onChange={handleAllChange(setGameURL)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border ${
+                      inputError && gameURL === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
                     placeholder="Enter game URL"
                   />
                 </div>

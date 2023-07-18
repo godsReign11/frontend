@@ -87,7 +87,11 @@ export default function CreateGame() {
                     value={playerName}
                     required
                     onChange={handleAllChange(setPlayerName)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
+                      error && playerName === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Enter the name of the player"
                   />
                 </div>
@@ -102,10 +106,14 @@ export default function CreateGame() {
                   <input
                     type="text"
                     id="playerShortName"
-                    value={playerName}
+                    value={playerShortName}
                     required
                     onChange={handleAllChange(setPlayerShortName)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
+                      error && playerShortName === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Enter the short name for the player"
                   />
                 </div>
@@ -122,7 +130,11 @@ export default function CreateGame() {
                     id="playerCategory"
                     value={playerCategory}
                     onChange={handleAllChange(setPlayerCategory)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
+                      error && playerCategory === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Enter the player category"
                   />
                 </div>
@@ -144,7 +156,11 @@ export default function CreateGame() {
                     value={playerOrder}
                     required
                     onChange={handleAllChange(setPlayerOrder)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
+                      error && playerOrder === ""
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Enter Player Order"
                   />
                 </div>
@@ -163,7 +179,7 @@ export default function CreateGame() {
                     accept="image/*"
                     multiple
                     name="files[]"
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                    className="input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4"
                   />
                 </div>
               </div>

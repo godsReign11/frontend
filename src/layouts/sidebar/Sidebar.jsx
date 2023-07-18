@@ -71,7 +71,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
           <span className="text-xl font-bold whitespace-pre cursor-pointer">
-            God's Reign
+            God's Reign Dashboard
           </span>
         </div>
 
@@ -127,7 +127,6 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-
             <li>
               <NavLink
                 to={"/create-contest"}
@@ -135,7 +134,7 @@ const Sidebar = () => {
                 activeclassname="active-link"
               >
                 <BsPerson size={23} className="min-w-max" />
-                Contest Manager
+                Create Contest
               </NavLink>
             </li>
           </ul>
@@ -154,7 +153,7 @@ const Sidebar = () => {
                 </Link>
               </div>
 
-              <div className="flex border-y border-slate-300 p-4 items-center justify-between">
+              <div className="flex  p-4 items-center justify-between">
                 <div>
                   <p>Profile</p>
                   <small></small>

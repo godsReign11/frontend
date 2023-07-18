@@ -16,7 +16,7 @@ export const createGameApi = {
   },
 
   CreateContest: async (json) => {
-    return await BASEAPIS.POSTAPI(json,"createContest");
+    return await BASEAPIS.POSTAPI(json, "createContest");
   },
 
   CreatePlayerForApp: async (body) => {
@@ -34,8 +34,6 @@ export const createGameApi = {
         } else return false;
       })
       .catch((err) => {
-        console.log("Some error occured, please retry");
-        console.log(err);
         return false;
       });
   },
