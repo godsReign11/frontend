@@ -16,7 +16,7 @@ export const createGameApi = {
   },
 
   CreateContest: async (json) => {
-    return await BASEAPIS.POSTAPIFORMDATA(json,"getPlayerAll");
+    return await BASEAPIS.POSTAPI(json,"createContest");
   },
 
   CreatePlayerForApp: async (body) => {

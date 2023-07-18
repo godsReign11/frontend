@@ -55,24 +55,45 @@ export default function CreateContest() {
     }
 
     const handleCreateContest = () => {
-        const json = {
-            teamAurl,
-            teamAscore,
-            teamAname,
-            teamBname,
-            teamBurl,
-            contestGame,
-            startDate,
-            title,
-            teamBscore,
-            contestUrl,
-            description,
-            subtitle,
-            contestGameId
+        const formData = new FormData()
+        formData.append("teamAurl",teamAurl)
+        formData.append("teamAscore",teamAscore)
+        formData.append("teamAname",teamAname)
+        formData.append("teamBname",teamBname)
+        formData.append("teamBurl",teamBurl)
+        formData.append("contestGame",contestGame)
+        formData.append("startDate",startDate)
+        formData.append("title",title)
+        formData.append("teamBscore",teamBscore)
+        formData.append("contestUrl",contestUrl)
+        formData.append("description",description)
+        formData.append("subtitle",subtitle)
+        formData.append("contestGameId",contestGameId)
+        console.log(formData)
+        // const json = {
+        //     teamAurl,
+        //     teamAscore,
+        //     teamAname,
+        //     teamBname,
+        //     teamBurl,
+        //     contestGame,
+        //     startDate,
+        //     title,
+        //     teamBscore,
+        //     contestUrl,
+        //     description,
+        //     subtitle,
+        //     contestGameId
 
-        }
-        createGameApi.CreateContest(json).then(res=>{
-            console.log(res)
+        // }
+        createGameApi.CreateContest(formData).then(res=>{
+            if (res.status_code === true) {
+                toast.success("Contest Created Successfully");
+                console.log(res.message);
+              } else {
+                toast.error(res.message);
+                console.log(res.message);
+              }
         })
     }
     return (
