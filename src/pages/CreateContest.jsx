@@ -4,8 +4,10 @@ import "./All.css";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 import { createGameApi } from "../Api/GameApi";
+import { CONTESTAPI } from "../Api/ContestApi";
 
 export default function CreateContest() {
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [gamesData, setGameData] = useState([]);
   const [teamAurl, setTeamAurl] = useState("");
   const [teamAscore, setTeamAscore] = useState("");
@@ -17,7 +19,7 @@ export default function CreateContest() {
   const [startDate, setStartDate] = useState("");
   const [title, setTitle] = useState("");
   const [teamBscore, setTeamBscore] = useState("");
-  const [contestUrl, setcontestUrl] = useState("");
+  // const [contestUrl, setcontestUrl] = useState("");
   const [description, setDescription] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [contestGameId, setContestGameId] = useState("");
@@ -59,13 +61,13 @@ export default function CreateContest() {
     formData.append("startDate", startDate);
     formData.append("title", title);
     formData.append("teamBscore", teamBscore);
-    formData.append("contestUrl", contestUrl);
+    formData.append("contestUrl", selectedFiles);
     formData.append("description", description);
     formData.append("subtitle", subtitle);
     formData.append("contestGameId", contestGameId);
     console.log(formData);
 
-    createGameApi.CreateContest(formData).then((res) => {
+    CONTESTAPI.CreateContest(formData).then((res) => {
       if (res.status_code === true) {
         toast.success("Contest Created Successfully");
         console.log(res.message);
@@ -75,6 +77,36 @@ export default function CreateContest() {
       }
     });
   };
+
+  const resetHandle = () => {
+    setTeamAurl('')
+    setTeamAscore('')
+    setTeamAname('')
+    setTeamBname('')
+    setTeamBurl('')
+    setContestGame('')
+    setStartDate('')
+    setTitle('')
+    setTeamBscore('')
+    // setcontestUrl('')
+    setDescription('')
+    setSubtitle('')
+    setContestGameId('')
+  
+  };
+
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const newImages = [...selectedFiles];
+    for (let i = 0; i < files.length; i++) {
+      newImages.push(files[i]);
+    }
+
+    setSelectedFiles(newImages);
+    console.log(selectedFiles);
+  };
+
+
   return (
     <div className="wrapper">
       <ToastContainer />
@@ -280,12 +312,13 @@ export default function CreateContest() {
                     Contest Url
                   </label>
                   <input
-                    type="text"
-                    id="playerCategory"
-                    value={contestUrl}
-                    onChange={handleAllChange(setcontestUrl)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter Contest Url"
+                    id="file"
+                    onChange={handleFileChange}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    name="files[]"
+                    className="input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4"
                   />
                 </div>
               </div>
@@ -336,6 +369,13 @@ export default function CreateContest() {
               className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"
             >
               Create Contest
+            </button>
+
+            <button
+              onClick={resetHandle}
+              className="button-secondary px-6 py-2 rounded-md text-blue-500 border border-blue-500 hover:text-white hover:bg-blue-500"
+            >
+              Reset
             </button>
           </div>
         </div>

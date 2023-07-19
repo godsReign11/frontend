@@ -137,6 +137,19 @@ const Sidebar = () => {
                 Create Contest
               </NavLink>
             </li>
+
+            <li>
+              <NavLink
+                to={"/all-contest"}
+                className="link"
+                activeclassname="active-link"
+              >
+                <BsPerson size={23} className="min-w-max" />
+                All Contest
+              </NavLink>
+            </li>
+
+            
           </ul>
           {open && (
             <div className="flex-1 text-sm z-50 max-h-48 my-auto whitespace-pre w-full font-medium">

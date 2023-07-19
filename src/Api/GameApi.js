@@ -8,19 +8,16 @@ export const createGameApi = {
   },
 
   GetAllGames: async () => {
-    return await BASEAPIS.GETAPI("getGames");
+    return BASEAPIS.GETAPI("getGames");
   },
 
   GetAllPlayers: async () => {
-    return await BASEAPIS.GETAPI("getPlayerAll");
+    return BASEAPIS.GETAPI("getPlayerAll");
   },
 
-  CreateContest: async (json) => {
-    return await BASEAPIS.POSTAPI(json, "createContest");
-  },
 
   CreatePlayerForApp: async (body) => {
-    return await fetch(baseURL + "createPlayer", {
+    return fetch(baseURL + "createPlayer", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -39,10 +36,10 @@ export const createGameApi = {
   },
 
   // ChangeCouponEndDate: async (json) => {
-  //     return await BASEAPIS.PUTAPI(json, 'promoUpdate');
+  //     return BASEAPIS.PUTAPI(json, 'promoUpdate');
   // },
 
   // ChangeCouponStatusUpdate: async (jsonbody) => {
-  //     return await BASEAPIS.PUTAPI(jsonbody, 'promoStatusUpdate');
+  //     return BASEAPIS.PUTAPI(jsonbody, 'promoStatusUpdate');
   // }
 };
