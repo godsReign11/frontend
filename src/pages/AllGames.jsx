@@ -18,8 +18,8 @@ export default function AllGames() {
     createGameApi.GetAllGames().then((data) => {
       if (data.status_code) {
         toast.done(data.message);
-        console.log(data.data);
-        setGameData(data.data);
+        // console.log(data.data);
+        // setGameData(data.data);
         setIsLoading(false);
       } else {
         toast.error(data.message);

@@ -1426,3 +1426,8 @@ legend {
   border: none;
   border-radius: 12px;
 }
+
+.table-card {
+  height: 80vh;
+  overflow-y: auto;
+}

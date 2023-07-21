@@ -22,7 +22,7 @@ const TopHead = (props) => {
       <div className="flex justify-end">
         <motion.h3
           className="text-lg font-semibold"
-          whileHover={{ scale: 1.1, color: "white" }}
+          whileHover={{ scale: 1.1, color: "purple" }}
           whileTap={{ scale: 0.9 }}
         >
           Profile
