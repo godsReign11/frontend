@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./All.css";
-import { createGameApi } from "../Api/GameApi";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
+import { BannerAPI } from "../Api/BannerAPI";
 
 export default function CreateBanner() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -52,7 +52,7 @@ export default function CreateBanner() {
         dataForm.append("playerImage", selectedFiles[i]);
       }
 
-      createGameApi.CreatePlayerForApp(dataForm).then((data) => {
+      BannerAPI.CreateBanner(dataForm).then((data) => {
         if (data.status_code === true) {
           toast.success("Ticket Generated Successfully");
           console.log(data.message);

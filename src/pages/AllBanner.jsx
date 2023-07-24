@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import moment from "moment/moment";
 import { Table, Spin, Image } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
 import TopHead from "./TopHead";
+import { BannerAPI } from "../Api/BannerAPI";
 
 export default function AllBanner() {
   const [BannersData, setBannerData] = useState([]);
@@ -15,7 +15,7 @@ export default function AllBanner() {
   }, []);
 
   const getAllBannersData = () => {
-    createGameApi.GetAllBanners().then((data) => {
+    BannerAPI.GetAllBanners().then((data) => {
       if (data.status) {
         toast.done(data.message);
         console.log(data.data);

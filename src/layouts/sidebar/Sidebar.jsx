@@ -1,12 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { motion } from "framer-motion";
-import { AiOutlineAppstore } from "react-icons/ai";
-import { BsPerson } from "react-icons/bs";
+import { motion, AnimatePresence } from "framer-motion";
+import { AiOutlineAppstore, AiFillCaretRight } from "react-icons/ai";
+import { GiTargetPoster } from "react-icons/gi";
 import { HiOutlineDatabase } from "react-icons/hi";
 import { useMediaQuery } from "react-responsive";
-import { MdMenu } from "react-icons/md";
+import { RiGamepadFill } from "react-icons/ri";
+
+import { TbPlayerEjectFilled, TbGoGame } from "react-icons/tb";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -27,184 +29,242 @@ const Sidebar = () => {
     isTabletMid && setOpen(false);
   }, [pathname]);
 
-  const Nav_animation = isTabletMid
-    ? {
-        open: {
-          x: 0,
-          width: "16rem",
-          transition: {
-            damping: 40,
-          },
-        },
-        closed: {
-          x: -250,
-          width: 0,
-          transition: {
-            damping: 40,
-            delay: 0.15,
-          },
-        },
-      }
-    : {
-        open: {
-          width: "16rem",
-          transition: {
-            damping: 40,
-          },
-        },
-        closed: {
-          width: "4rem",
-          transition: {
-            damping: 40,
-          },
-        },
-      };
+  // Parents and Child Managers
+  const [gameManagerOpen, setGameManagerOpen] = useState(false);
+  const toggleGameManager = () => {
+    setGameManagerOpen((prevState) => !prevState);
+  };
+
+  const [playerManagerOpen, setPlayerManagerOpen] = useState(false);
+  const [contestManagerOpen, setContestManagerOpen] = useState(false);
+  const [bannerManagerOpen, setBannerManagerOpen] = useState(false);
+
+  const togglePlayerManager = () => {
+    setPlayerManagerOpen((prevState) => !prevState);
+  };
+
+  const toggleContestManager = () => {
+    setContestManagerOpen((prevState) => !prevState);
+  };
+
+  const toggleBannerManager = () => {
+    setBannerManagerOpen((prevState) => !prevState);
+  };
 
   return (
     <div className="flex sticky top-0">
       <motion.div
         ref={sidebarRef}
-        variants={Nav_animation}
         initial={{ x: isTabletMid ? -250 : 0 }}
-        animate={open ? "open" : "closed"}
+        animate={{ x: open ? 0 : -250 }}
         className="bg-white text-gray shadow-xl z-[999] max-w-[16rem] w-[16rem] overflow-hidden md:relative fixed h-screen top-0"
       >
         <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
-          <span className="text-xl font-bold whitespace-pre cursor-pointer">
+          {/* <img
+            src="./Images/logo.png" //
+            alt="logo"
+            className="w-7 h-7"
+          /> */}
+
+          <motion.span
+            className="text-xl font-bold whitespace-pre cursor-pointer"
+            onClick={() => setOpen(!open)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             God's Reign Dashboard
-          </span>
+          </motion.span>
         </div>
 
         <div className="flex flex-col h-full">
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100 md:h-[68%] h-[70%]">
-            <li>
-              <NavLink to={"/"} className="link" activeclassname="active-link">
+            <li className="hover:bg-gray-200">
+              <NavLink to={"/"} className="link" activeClassName="active-link">
                 <AiOutlineAppstore size={23} className="min-w-max" />
                 Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to={"/game-manager"}
-                className="link"
-                activeclassname="active-link"
+              <motion.div
+                className="link cursor-pointer hover:bg-gray-200 "
+                onClick={toggleGameManager}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
               >
-                <HiOutlineDatabase size={23} className="min-w-max" />
-                Create Game
-              </NavLink>
+                <RiGamepadFill size={23} className="min-w-max" />
+                Game Manager
+              </motion.div>
+              <AnimatePresence>
+                {gameManagerOpen && (
+                  <motion.ul
+                    className="flex flex-col gap-1 ml-5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
+                      <NavLink
+                        to={"/game-manager"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        Create Game
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/all-games"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        All Games
+                      </NavLink>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
+            <li>
+              <motion.div
+                className="link cursor-pointer hover:bg-gray-200"
+                onClick={togglePlayerManager}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+              >
+                <TbPlayerEjectFilled size={23} className="min-w-max" />
+                Player Manager
+              </motion.div>
+              <AnimatePresence>
+                {playerManagerOpen && (
+                  <motion.ul
+                    className="flex flex-col gap-1 ml-5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
+                      <NavLink
+                        to={"/create-player"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        Create Player
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/all-players"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        All Player List
+                      </NavLink>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
 
-            <li>
-              <NavLink
-                to={"/all-games"}
-                className="link"
-                activeclassname="active-link"
-              >
-                <HiOutlineDatabase size={23} className="min-w-max" />
-                All Games
-              </NavLink>
-            </li>
+            {/* Contest Manger */}
 
             <li>
-              <NavLink
-                to={"/create-player"}
-                className="link"
-                activeclassname="active-link"
+              <motion.div
+                className="link cursor-pointer hover:bg-gray-200"
+                onClick={toggleContestManager}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
               >
-                <BsPerson size={23} className="min-w-max" />
-                Create Player
-              </NavLink>
+                <TbGoGame size={23} className="min-w-max" />
+                Contest Manager
+              </motion.div>
+              <AnimatePresence>
+                {contestManagerOpen && (
+                  <motion.ul
+                    className="flex flex-col gap-1 ml-5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
+                      <NavLink
+                        to={"/create-contest"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        Create Contest
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/all-contest"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        All Contest List
+                      </NavLink>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
 
+            {/* Banner Manager */}
             <li>
-              <NavLink
-                to={"/all-players"}
-                className="link"
-                activeclassname="active-link"
+              <motion.div
+                className="link cursor-pointer hover:bg-gray-200"
+                onClick={toggleBannerManager}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
               >
-                <BsPerson size={23} className="min-w-max" />
-                All Players
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to={"/create-contest"}
-                className="link"
-                activeclassname="active-link"
-              >
-                <BsPerson size={23} className="min-w-max" />
-                Create Contest
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to={"/all-contest"}
-                className="link"
-                activeclassname="active-link"
-              >
-                <BsPerson size={23} className="min-w-max" />
-                All Contest
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to={"/create-banner"}
-                className="link"
-                activeclassname="active-link"
-              >
-                <BsPerson size={23} className="min-w-max" />
-                Create Banner
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to={"/all-banners"}
-                className="link"
-                activeclassname="active-link"
-              >
-                <BsPerson size={23} className="min-w-max" />
-                All Banners
-              </NavLink>
+                <GiTargetPoster size={23} className="min-w-max" />
+                Banner Manager
+              </motion.div>
+              <AnimatePresence>
+                {bannerManagerOpen && (
+                  <motion.ul
+                    className="flex flex-col gap-1 ml-5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
+                      <NavLink
+                        to={"/create-banner"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        Create Banner
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/all-banners"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        All Banner List
+                      </NavLink>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
           </ul>
-          {open && (
-            <div className="flex-1 text-sm z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
-              <div className="flex border-y border-slate-300 p-4 items-center justify-between bg-gray-100 text-gray-900">
-                <div>
-                  <p>Log Out</p>
-                  <small></small>
-                </div>
-                <Link
-                  className="text-red-500 py-1.5 px-3 text-xs bg-red-50 rounded-xl"
-                  // to="/login"
-                >
-                  Logout
-                </Link>
-              </div>
-
-              <div className="flex  p-4 items-center justify-between bg-gray-100 text-gray-900">
-                <div>
-                  <p>Profile</p>
-                  <small></small>
-                </div>
-                <Link
-                  className="text-red-500 py-1.5 px-3 text-xs bg-red-50 rounded-xl"
-                  // to="/login"
-                >
-                  Settings
-                </Link>
-              </div>
-            </div>
-          )}
         </div>
       </motion.div>
-      <div className="m-3 md:hidden" onClick={() => setOpen(true)}>
-        <MdMenu size={25} />
-      </div>
     </div>
   );
 };
