@@ -149,11 +149,31 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            
+            <li>
+              <NavLink
+                to={"/create-banner"}
+                className="link"
+                activeclassname="active-link"
+              >
+                <BsPerson size={23} className="min-w-max" />
+                Create Banner
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={"/all-banners"}
+                className="link"
+                activeclassname="active-link"
+              >
+                <BsPerson size={23} className="min-w-max" />
+                All Banners
+              </NavLink>
+            </li>
           </ul>
           {open && (
             <div className="flex-1 text-sm z-50 max-h-48 my-auto whitespace-pre w-full font-medium">
-              <div className="flex border-y border-slate-300 p-4 items-center justify-between">
+              <div className="flex border-y border-slate-300 p-4 items-center justify-between bg-gray-100 text-gray-900">
                 <div>
                   <p>Log Out</p>
                   <small></small>
@@ -166,7 +186,7 @@ const Sidebar = () => {
                 </Link>
               </div>
 
-              <div className="flex  p-4 items-center justify-between">
+              <div className="flex  p-4 items-center justify-between bg-gray-100 text-gray-900">
                 <div>
                   <p>Profile</p>
                   <small></small>

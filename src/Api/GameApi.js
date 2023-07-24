@@ -15,6 +15,9 @@ export const createGameApi = {
     return BASEAPIS.GETAPI("getPlayerAll");
   },
 
+  GetAllBanners: async () => {
+    return BASEAPIS.GETAPI("getBanner");
+  },
 
   CreatePlayerForApp: async (body) => {
     return fetch(baseURL + "createPlayer", {

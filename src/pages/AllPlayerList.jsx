@@ -31,7 +31,6 @@ export default function AllPlayerList() {
   const handleDate = (date) => {
     return moment(date).format("DD/MM/YYYY");
   };
-
   const columns = [
     {
       title: "Index",
@@ -86,13 +85,16 @@ export default function AllPlayerList() {
               className="my-8 items-center"
             />
           ) : (
-            <Table
-              columns={columns}
-              dataSource={playersData}
-              rowKey={(players) => players.id}
-              pagination={false}
-              className="table-auto mt-6"
-            />
+            <div className="overflow-x-auto">
+              {/* Wrap the Table inside a div with overflow-x-auto class */}
+              <Table
+                columns={columns}
+                dataSource={playersData}
+                rowKey={(players) => players.id}
+                pagination={false}
+                className="table-auto mt-6"
+              />
+            </div>
           )}
         </div>
       </div>

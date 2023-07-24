@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import moment from "moment/moment";
-import { Table, Spin, Card } from "antd";
+import { Table, Spin, Image } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
 import TopHead from "./TopHead";
 
-export default function AllGames() {
-  const [gamesData, setGameData] = useState([]);
+export default function AllBanner() {
+  const [BannersData, setBannerData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllGamesDash();
+    getAllBannersData();
   }, []);
 
-  const getAllGamesDash = () => {
-    createGameApi.GetAllGames().then((data) => {
-      if (data.status_code) {
+  const getAllBannersData = () => {
+    createGameApi.GetAllBanners().then((data) => {
+      if (data.status) {
         toast.done(data.message);
-        // console.log(data.data);
-        setGameData(data.data);
+        console.log(data.data);
+        setBannerData(data.data);
         setIsLoading(false);
       } else {
         toast.error(data.message);
@@ -38,32 +38,39 @@ export default function AllGames() {
       dataIndex: "index",
       key: "index",
       render: (_, record, index) => index + 1,
-      width: 80,
     },
     {
-      title: "Game Name",
-      dataIndex: "name",
-      key: "name",
-      width: 200,
+      title: "Banner Name",
+      dataIndex: "BannerName",
+      key: "BannerName",
     },
+
     {
       title: "Created At",
       dataIndex: "createdAt",
       key: "createdAt",
       render: handleDate,
-      width: 150,
     },
     {
-      title: "Game URL",
-      dataIndex: "gameUrl",
-      key: "gameUrl",
-      width: 100,
+      title: "Banner Short Name",
+      dataIndex: "BannerShortName",
+      key: "BannerShortName",
     },
     {
-      title: "Game Order",
+      title: "Banner Order",
       dataIndex: "order",
       key: "order",
-      width: 120,
+    },
+
+    {
+      title: "Banner Image",
+      dataIndex: "BannerImage",
+      key: "BannerImage",
+      render: (imageSrc) => (
+        <Image.PreviewGroup>
+          <Image src={imageSrc} width={80} height={80} />
+        </Image.PreviewGroup>
+      ),
     },
   ];
 
@@ -71,7 +78,7 @@ export default function AllGames() {
     <div className="wrapper">
       <div className="content-page rtl-page">
         <div className="container-fluid">
-          <TopHead name={"All Games"} />
+          <TopHead name={"Banners List"} />
 
           {isLoading ? (
             <Spin
@@ -80,16 +87,13 @@ export default function AllGames() {
               className="my-8 items-center"
             />
           ) : (
-            <Card className="table-card mt-6">
-              <Table
-                columns={columns}
-                dataSource={gamesData}
-                rowKey={(players) => players.id}
-                pagination={false}
-                className="mt-6"
-                scroll={{ x: "max-content" }} // Enable fixed table layout
-              />
-            </Card>
+            <Table
+              columns={columns}
+              dataSource={BannersData}
+              rowKey={(Banners) => Banners.id}
+              pagination={false}
+              className="table-auto mt-6"
+            />
           )}
         </div>
       </div>

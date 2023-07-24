@@ -8,6 +8,8 @@ import CreatePlayer from "./pages/CreatePlayer";
 import AllPlayerList from "./pages/AllPlayerList";
 import CreateContest from "./pages/CreateContest";
 import AllContest from "./pages/AllContest";
+import CreateBanner from "./pages/CreateBanner";
+import AllBanner from "./pages/AllBanner";
 
 const App = () => {
   return (
@@ -21,7 +23,9 @@ const App = () => {
         <Route path="/all-players" element={<AllPlayerList />} />
         <Route path="/create-contest" element={<CreateContest />} />
         <Route path="/all-contest" element={<AllContest />} />
-        
+        <Route path="/create-banner" element={<CreateBanner />} />
+        <Route path="all-banners" element={<AllBanner />} />
+
         {/* <Route path="/settings" element={<Settings />} /> */}
         {/* <Route path="/build/:bID" element={<Build />} />
         <Route path="/analytics/:aID" element={<Analytics />} /> */}
