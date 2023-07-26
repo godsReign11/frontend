@@ -6,36 +6,55 @@ import TopHead from "./TopHead";
 import { createGameApi } from "../Api/GameApi";
 
 export default function CreateGame() {
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const [gameName, setGameName] = useState("");
+  const [gameOrder, setGameOrder] = useState("");
+
+  const [error, setError] = useState(false);
+
   const handleAllChange = (setterFunction) => (e) => {
     const { value } = e.target;
     setterFunction(value);
   };
 
-  const [gameName, setGameName] = useState("");
-  const [gameOrder, setGameOrder] = useState("");
-  const [gameURL, setGameURL] = useState("");
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const newImages = [...selectedFiles];
+    for (let i = 0; i < files.length; i++) {
+      newImages.push(files[i]);
+    }
 
-  const [inputError, setInputError] = useState(false);
+    setSelectedFiles(newImages);
+    console.log(selectedFiles);
+  };
 
-  const createGameDashboard = () => {
-    const data = {
-      name: gameName,
-      order: gameOrder,
-      gameUrl: gameURL,
-    };
-    if (gameName === "" || gameOrder === "" || gameURL === "") {
-      setInputError(true);
+  const handleCreateGameData = () => {
+    if (
+      gameName === "" ||
+      gameOrder === ""
+    ) {
+      setError(true);
     } else {
-      setInputError(false);
+      setError(false);
 
-      createGameApi.CreateGameForApp(data).then((data) => {
-        if (data.status_code) {
-          toast.success(data.message);
-          setGameName("");
-          setGameOrder("");
-          setGameURL("");
+      const dataForm = new FormData();
+      dataForm.append("name", gameName);
+      dataForm.append("order", gameOrder);
+
+      // Append selected files
+      for (let i = 0; i < selectedFiles.length; i++) {
+        dataForm.append("fileName", selectedFiles[i]);
+      }
+
+      createGameApi.CreateGameForApp(dataForm).then((data) => {
+        if (data.status_code === true) {
+          toast.success("Game Created Successfully");
+          console.log(data.message);
         } else {
-          toast.error(data.message);
+          toast.error("Some Error Occured");
+          console.log(data.message);
         }
       });
     }
@@ -70,11 +89,10 @@ export default function CreateGame() {
                     value={gameName}
                     required
                     onChange={handleAllChange(setGameName)}
-                    className={`input-field w-full px-4 py-2 border ${
-                      inputError && gameName === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
+                    className={`input-field w-full px-4 py-2 border ${error && gameName === ""
+                      ? "border-red-500"
+                      : "border-gray-300"
+                      } rounded-md focus:outline-none bg-slate-100 mt-4`}
                     placeholder="Enter the name of the game"
                   />
                 </div>
@@ -91,47 +109,38 @@ export default function CreateGame() {
                     id="gameOrder"
                     value={gameOrder}
                     onChange={handleAllChange(setGameOrder)}
-                    className={`input-field w-full px-4 py-2 border ${
-                      inputError && gameOrder === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
+                    className={`input-field w-full px-4 py-2 border ${error && gameOrder === ""
+                      ? "border-red-500"
+                      : "border-gray-300"
+                      } rounded-md focus:outline-none bg-slate-100 mt-4`}
                     placeholder="Enter the game order"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex-1">
-              <div className="card bg-white rounded-lg shadow-md p-6">
-                <div className="mb-6">
-                  <label
-                    htmlFor="gameURL"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Game URL
-                  </label>
-                  <input
-                    type="text"
-                    id="gameURL"
-                    value={gameURL}
-                    required
-                    onChange={handleAllChange(setGameURL)}
-                    className={`input-field w-full px-4 py-2 border ${
-                      inputError && gameURL === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
-                    placeholder="Enter game URL"
-                  />
-                </div>
-              </div>
+            <div className="mb-6">
+              <label
+                htmlFor="upload"
+                className="text-lg font-medium text-gray-800 mb-1"
+              >
+                Set Player Image
+              </label>
+              <input
+                id="file"
+                onChange={handleFileChange}
+                type="file"
+                accept="image/*"
+                multiple
+                name="files[]"
+                className="input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4"
+              />
             </div>
           </div>
 
           <div className="flex mt-6 gap-1">
             <button
-              onClick={createGameDashboard}
+              onClick={handleCreateGameData}
               className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"
             >
               Create

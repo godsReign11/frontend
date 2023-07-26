@@ -7,10 +7,9 @@ import { BannerAPI } from "../Api/BannerAPI";
 export default function CreateBanner() {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  const [playerName, setPlayerName] = useState("");
-  const [playerShortName, setPlayerShortName] = useState("");
-  const [playerOrder, setPlayerOrder] = useState("");
-  const [playerCategory, setPlayerCategory] = useState("");
+  const [bannerTitle, setBannerTitle] = useState("");
+  const [bannerDescription, setBannerDescription] = useState("");
+  const [bannerVideoURL, setBannerVideoURL] = useState("");
 
   const [error, setError] = useState(false);
 
@@ -32,29 +31,27 @@ export default function CreateBanner() {
 
   const handleCreatePlayerData = () => {
     if (
-      playerName === "" ||
-      playerShortName === "" ||
-      playerCategory === "" ||
-      playerOrder === ""
+      bannerTitle === "" ||
+      bannerVideoURL === "" ||
+      bannerDescription === ""
     ) {
       setError(true);
     } else {
       setError(false);
 
       const dataForm = new FormData();
-      dataForm.append("playerName", playerName);
-      dataForm.append("playerShortName", playerShortName);
-      dataForm.append("playerGameCategory", playerCategory);
-      dataForm.append("order", playerOrder);
+      dataForm.append("videoUrl", bannerVideoURL);
+      dataForm.append("title", bannerTitle);
+      dataForm.append("description", bannerDescription);
 
       // Append selected files
       for (let i = 0; i < selectedFiles.length; i++) {
-        dataForm.append("playerImage", selectedFiles[i]);
+        dataForm.append("fileName", selectedFiles[i]);
       }
 
       BannerAPI.CreateBanner(dataForm).then((data) => {
         if (data.status_code === true) {
-          toast.success("Ticket Generated Successfully");
+          toast.success("Banner Generated Successfully");
           console.log(data.message);
         } else {
           toast.error("Some Error Occured");
@@ -84,14 +81,13 @@ export default function CreateBanner() {
                   <input
                     type="text"
                     id="gameName"
-                    value={playerName}
+                    value={bannerTitle}
                     required
-                    onChange={handleAllChange(setPlayerName)}
-                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
-                      error && playerName === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    }`}
+                    onChange={handleAllChange(setBannerTitle)}
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${error && playerName === ""
+                      ? "border-red-500"
+                      : "border-gray-300"
+                      }`}
                     placeholder="Enter the name of the player"
                   />
                 </div>
@@ -106,14 +102,13 @@ export default function CreateBanner() {
                   <textarea
                     type="text"
                     id="playerShortName"
-                    value={playerShortName}
+                    value={bannerDescription}
                     required
-                    onChange={handleAllChange(setPlayerShortName)}
-                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${
-                      error && playerShortName === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    }`}
+                    onChange={handleAllChange(setBannerDescription)}
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${error && playerShortName === ""
+                      ? "border-red-500"
+                      : "border-gray-300"
+                      }`}
                     placeholder="Enter the short name for the player"
                   />
                 </div>
@@ -150,13 +145,12 @@ export default function CreateBanner() {
                   <textarea
                     type="text"
                     id="playerCategory"
-                    value={playerCategory}
-                    onChange={handleAllChange(setPlayerCategory)}
-                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-3 ${
-                      error && playerCategory === ""
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    }`}
+                    value={bannerVideoURL}
+                    onChange={handleAllChange(setBannerVideoURL)}
+                    className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-3 ${error && playerCategory === ""
+                      ? "border-red-500"
+                      : "border-gray-300"
+                      }`}
                     placeholder="Enter the player category"
                   />
                 </div>

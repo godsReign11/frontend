@@ -34,6 +34,25 @@ export const createGameApi = {
       });
   },
 
+  CreateGameForApp: async (body) => {
+    return fetch(baseURL + "createGame", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: body,
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json != null) {
+          return json;
+        } else return false;
+      })
+      .catch((err) => {
+        return false;
+      });
+  },
+
   // ChangeCouponEndDate: async (json) => {
   //     return BASEAPIS.PUTAPI(json, 'promoUpdate');
   // },

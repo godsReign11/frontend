@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import moment from "moment/moment";
-import { Table, Spin, Card } from "antd";
+import { Table, Spin, Card, Image } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
 import TopHead from "./TopHead";
+
 
 export default function AllGames() {
   const [gamesData, setGameData] = useState([]);
@@ -54,10 +55,14 @@ export default function AllGames() {
       width: 150,
     },
     {
-      title: "Game URL",
+      title: "Game Image",
       dataIndex: "gameUrl",
       key: "gameUrl",
-      width: 100,
+      render: (imageSrc) => (
+        <Image.PreviewGroup>
+          <Image src={imageSrc} width={80} height={80} />
+        </Image.PreviewGroup>
+      ),
     },
     {
       title: "Game Order",
