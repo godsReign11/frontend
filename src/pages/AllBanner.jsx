@@ -40,9 +40,9 @@ export default function AllBanner() {
       render: (_, record, index) => index + 1,
     },
     {
-      title: "Banner Name",
-      dataIndex: "BannerName",
-      key: "BannerName",
+      title: "Banner Description",
+      dataIndex: "description",
+      key: "description",
     },
 
     {
@@ -52,20 +52,36 @@ export default function AllBanner() {
       render: handleDate,
     },
     {
-      title: "Banner Short Name",
-      dataIndex: "BannerShortName",
-      key: "BannerShortName",
+      title: "Banner Title",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: "Banner Order",
-      dataIndex: "order",
-      key: "order",
+      title: "Video",
+      dataIndex: "videoUrl",
+      key: "videoUrl",
+    },
+
+    {
+      title: "Active",
+      dataIndex: "isActive",
+      key: "isActive",
+      render: (status) =>
+        status === true ? (
+          <h6 className="bg-green-800 text-teal-50 px-2 py-1 rounded-md text-center">
+            Yes
+          </h6>
+        ) : (
+          <h6 className="bg-orange-800 text-teal-50 px-2 py-1 rounded-md text-center">
+            NO
+          </h6>
+        ),
     },
 
     {
       title: "Banner Image",
-      dataIndex: "BannerImage",
-      key: "BannerImage",
+      dataIndex: "bannerUrl",
+      key: "bannerUrl",
       render: (imageSrc) => (
         <Image.PreviewGroup>
           <Image src={imageSrc} width={80} height={80} />

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./All.css";
-// import { createGameApi } from "../Api/GameApi";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 import { createGameApi } from "../Api/GameApi";
@@ -12,14 +11,12 @@ export default function CreateContest() {
   const [teamAurl, setTeamAurl] = useState("");
   const [teamAscore, setTeamAscore] = useState("");
   const [teamAname, setTeamAname] = useState("");
-
   const [teamBname, setTeamBname] = useState("");
   const [teamBurl, setTeamBurl] = useState("");
   const [contestGame, setContestGame] = useState("");
   const [startDate, setStartDate] = useState("");
   const [title, setTitle] = useState("");
   const [teamBscore, setTeamBscore] = useState("");
-  // const [contestUrl, setcontestUrl] = useState("");
   const [description, setDescription] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [contestGameId, setContestGameId] = useState("");
@@ -31,8 +28,6 @@ export default function CreateContest() {
   const getAllGamesDash = () => {
     createGameApi.GetAllGames().then((data) => {
       if (data.status_code) {
-        toast.done(data.message);
-        console.log(data.data);
         setGameData(data.data);
       } else {
         toast.error(data.message);
@@ -46,8 +41,12 @@ export default function CreateContest() {
   };
 
   const handleGameChange = (e) => {
-    // console.log(e.target.value)
     setContestGameId(e.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    setSelectedFiles([...selectedFiles, ...files]);
   };
 
   const handleCreateContest = () => {
@@ -61,51 +60,39 @@ export default function CreateContest() {
     formData.append("startDate", startDate);
     formData.append("title", title);
     formData.append("teamBscore", teamBscore);
-    formData.append("contestUrl", selectedFiles);
     formData.append("description", description);
     formData.append("subtitle", subtitle);
     formData.append("contestGameId", contestGameId);
-    console.log(formData);
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      formData.append("fileName", selectedFiles[i]);
+    }
 
     CONTESTAPI.CreateContest(formData).then((res) => {
-      if (res.status_code === true) {
+      if (res.status_code) {
         toast.success("Contest Created Successfully");
-        console.log(res.message);
+        clearForm();
       } else {
         toast.error(res.message);
-        console.log(res.message);
       }
     });
   };
 
-  const resetHandle = () => {
-    setTeamAurl('')
-    setTeamAscore('')
-    setTeamAname('')
-    setTeamBname('')
-    setTeamBurl('')
-    setContestGame('')
-    setStartDate('')
-    setTitle('')
-    setTeamBscore('')
-    // setcontestUrl('')
-    setDescription('')
-    setSubtitle('')
-    setContestGameId('')
-  
+  const clearForm = () => {
+    setTeamAurl("");
+    setTeamAscore("");
+    setTeamAname("");
+    setTeamBname("");
+    setTeamBurl("");
+    setContestGame("");
+    setStartDate("");
+    setTitle("");
+    setTeamBscore("");
+    setSelectedFiles([]);
+    setDescription("");
+    setSubtitle("");
+    setContestGameId("");
   };
-
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-    const newImages = [...selectedFiles];
-    for (let i = 0; i < files.length; i++) {
-      newImages.push(files[i]);
-    }
-
-    setSelectedFiles(newImages);
-    console.log(selectedFiles);
-  };
-
 
   return (
     <div className="wrapper">
@@ -126,22 +113,14 @@ export default function CreateContest() {
                   <div className="relative w-full lg:max-w-sm">
                     <select
                       onChange={handleGameChange}
+                      value={contestGameId}
                       className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
                     >
-                      <option
-                        disabled
-                        selected
-                        value="select"
-                        className="text-gray-900 bg-gray-100"
-                      >
+                      <option value="" disabled>
                         Select Game
                       </option>
                       {gamesData.map((data) => (
-                        <option
-                          key={data._id}
-                          value={data._id}
-                          className="text-gray-900 bg-gray-100"
-                        >
+                        <option key={data._id} value={data._id}>
                           {data.name}
                         </option>
                       ))}
@@ -152,6 +131,7 @@ export default function CreateContest() {
             </div>
           </div>
 
+          {/* Rest of the form input sections here... */}
           <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
             <div className="flex-1">
               <div className="card bg-white rounded-lg shadow-md p-6">
@@ -369,13 +349,6 @@ export default function CreateContest() {
               className="button-primary px-6 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600"
             >
               Create Contest
-            </button>
-
-            <button
-              onClick={resetHandle}
-              className="button-secondary px-6 py-2 rounded-md text-blue-500 border border-blue-500 hover:text-white hover:bg-blue-500"
-            >
-              Reset
             </button>
           </div>
         </div>
