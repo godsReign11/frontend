@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import TopHead from "./TopHead";
 
 
-export default function AllGames() {
+export default function AllUsers() {
   const [gamesData, setGameData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -76,7 +76,7 @@ export default function AllGames() {
     <div className="wrapper">
       <div className="content-page rtl-page">
         <div className="container-fluid">
-          <TopHead name={"All Games"} />
+          <TopHead name={"All Users List"} />
 
           {isLoading ? (
             <Spin
@@ -92,7 +92,7 @@ export default function AllGames() {
                 rowKey={(game) => game.id}
                 pagination={false}
                 className="mt-6"
-                scroll={{ x: "max-content" }} // Enable fixed table layout
+                scroll={{ x: "max-content" }}
               />
             </Card>
           )}

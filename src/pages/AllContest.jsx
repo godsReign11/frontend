@@ -18,7 +18,7 @@ export default function AllContest() {
   const getAllContestData = () => {
     console.log("first");
     CONTESTAPI.GetContest().then((data) => {
-      if (data.status_code) {
+      if (data.status) {
         toast.done(data.message);
         console.log(data.data);
         setContestData(data.data);
@@ -97,6 +97,16 @@ export default function AllContest() {
       title: "Title",
       dataIndex: "title",
       key: "title",
+    },
+    {
+      title: "Contest Image",
+      dataIndex: "gameUrl",
+      key: "gameUrl",
+      render: (imageSrc) => (
+        <Image.PreviewGroup>
+          <Image src={imageSrc} width={80} height={80} />
+        </Image.PreviewGroup>
+      ),
     },
 
     // {

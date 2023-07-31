@@ -34,13 +34,13 @@ export const createGameApi = {
       });
   },
 
-  CreateGameForApp: async (body) => {
+  CreateGameForApp: async (jsonBody) => {
     return fetch(baseURL + "createGame", {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
-      body: body,
+      body: jsonBody,
     })
       .then((response) => response.json())
       .then((json) => {

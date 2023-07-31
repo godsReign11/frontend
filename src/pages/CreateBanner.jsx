@@ -50,7 +50,7 @@ export default function CreateBanner() {
       }
 
       BannerAPI.CreateBanner(dataForm).then((data) => {
-        if (data.status_code === true) {
+        if (data.status) {
           toast.success("Banner Generated Successfully");
           console.log(data.message);
         } else {

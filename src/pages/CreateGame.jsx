@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopHead from "./TopHead";
 import { createGameApi } from "../Api/GameApi";
+import { Result, Modal } from 'antd';
 
 export default function CreateGame() {
 
@@ -13,6 +14,8 @@ export default function CreateGame() {
   const [gameOrder, setGameOrder] = useState("");
 
   const [error, setError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleAllChange = (setterFunction) => (e) => {
     const { value } = e.target;
@@ -49,9 +52,11 @@ export default function CreateGame() {
       }
 
       createGameApi.CreateGameForApp(dataForm).then((data) => {
-        if (data.status_code === true) {
+        if (data.status) {
           toast.success("Game Created Successfully");
           console.log(data.message);
+          resetHandle()
+          setIsModalOpen(true)
         } else {
           toast.error("Some Error Occured");
           console.log(data.message);
@@ -63,7 +68,7 @@ export default function CreateGame() {
   const resetHandle = () => {
     setGameName("");
     setGameOrder("");
-    setGameURL("");
+    setSelectedFiles("");
   };
 
   return (
@@ -155,6 +160,18 @@ export default function CreateGame() {
           </div>
         </div>
       </div>
+
+      <Modal open={isModalOpen} footer={null} closable={false} closeIcon={false}>
+        <Result
+          status="success"
+          title="Successfully Created the Game"
+          subTitle="Redirect to the All Games"
+          extra={[
+
+          ]}>
+          <Link to='/all-games' className="button-create-game">Yes, Please</Link>
+        </Result>
+      </Modal>
     </div>
   );
 }

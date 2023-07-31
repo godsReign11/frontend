@@ -4,9 +4,8 @@ import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineAppstore, AiFillCaretRight } from "react-icons/ai";
 import { GiTargetPoster } from "react-icons/gi";
-import { HiOutlineDatabase } from "react-icons/hi";
 import { useMediaQuery } from "react-responsive";
-import { RiGamepadFill } from "react-icons/ri";
+import { RiGamepadFill, RiUser4Fill } from "react-icons/ri";
 
 import { TbPlayerEjectFilled, TbGoGame } from "react-icons/tb";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -38,6 +37,7 @@ const Sidebar = () => {
   const [playerManagerOpen, setPlayerManagerOpen] = useState(false);
   const [contestManagerOpen, setContestManagerOpen] = useState(false);
   const [bannerManagerOpen, setBannerManagerOpen] = useState(false);
+  const [userManagerOpen, setUserManagerOpen] = useState(false);
 
   const togglePlayerManager = () => {
     setPlayerManagerOpen((prevState) => !prevState);
@@ -50,6 +50,10 @@ const Sidebar = () => {
   const toggleBannerManager = () => {
     setBannerManagerOpen((prevState) => !prevState);
   };
+
+  const toggleUserManager = () => {
+    setUserManagerOpen((prevState) => !prevState);
+  }
 
   return (
     <div className="flex sticky top-0">
@@ -262,7 +266,54 @@ const Sidebar = () => {
                 )}
               </AnimatePresence>
             </li>
+
+            {/* User Manager */}
+            <li>
+              <motion.div
+                className="link cursor-pointer hover:bg-gray-200"
+                onClick={toggleUserManager}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+              >
+                <RiUser4Fill size={23} className="min-w-max" />
+                User Manager
+              </motion.div>
+              <AnimatePresence>
+                {userManagerOpen && (
+                  <motion.ul
+                    className="flex flex-col gap-1 ml-5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
+                      <NavLink
+                        to={"/all-users"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        All Users
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <AiFillCaretRight size={20} className="min-w-max" />
+                        ----
+                      </NavLink>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
           </ul>
+
+
         </div>
       </motion.div>
     </div>

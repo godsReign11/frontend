@@ -27,7 +27,7 @@ export default function CreateContest() {
 
   const getAllGamesDash = () => {
     createGameApi.GetAllGames().then((data) => {
-      if (data.status_code) {
+      if (data.status) {
         setGameData(data.data);
       } else {
         toast.error(data.message);
@@ -69,7 +69,7 @@ export default function CreateContest() {
     }
 
     CONTESTAPI.CreateContest(formData).then((res) => {
-      if (res.status_code) {
+      if (res.status) {
         toast.success("Contest Created Successfully");
         clearForm();
       } else {

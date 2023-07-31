@@ -1431,3 +1431,8 @@ legend {
   height: 80vh;
   overflow-y: auto;
 }
+
+.button-create-game {
+  display: flex;
+  align-items: center;
+}
