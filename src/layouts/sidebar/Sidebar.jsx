@@ -125,7 +125,7 @@ const Sidebar = () => {
                         activeClassName="active-link"
                       >
                         <AiFillCaretRight size={20} className="min-w-max" />
-                        All Games
+                        View All Games
                       </NavLink>
                     </li>
                   </motion.ul>

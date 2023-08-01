@@ -60,7 +60,7 @@ export default function AllGames() {
       key: "gameUrl",
       render: (imageSrc) => (
         <Image.PreviewGroup>
-          <Image src={imageSrc} width={80} height={80} />
+          <Image src={imageSrc} width={80} height={80} loading="lazy" />
         </Image.PreviewGroup>
       ),
     },

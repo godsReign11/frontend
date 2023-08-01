@@ -54,7 +54,7 @@ export default function CreateGame() {
 
       createGameApi.CreatePlayerForApp(dataForm).then((data) => {
         if (data.status) {
-          toast.success("Ticket Generated Successfully");
+          toast.success("Player Created Successfully");
           console.log(data.message);
         } else {
           toast.error(data.message);
@@ -121,7 +121,7 @@ export default function CreateGame() {
                     htmlFor="gameOrder"
                     className="text-lg font-medium text-gray-800 mb-1"
                   >
-                    Set Player Category
+                    Game Category
                   </label>
                   <input
                     type="text"
@@ -145,7 +145,7 @@ export default function CreateGame() {
                     htmlFor="gameURL"
                     className="text-lg font-medium text-gray-800 mb-1"
                   >
-                    Set Player Order
+                    Player Order
                   </label>
                   <input
                     type="text"
@@ -166,7 +166,7 @@ export default function CreateGame() {
                     htmlFor="upload"
                     className="text-lg font-medium text-gray-800 mb-1"
                   >
-                    Set Player Image
+                    Select Player Image
                   </label>
                   <input
                     id="file"

@@ -84,7 +84,7 @@ export default function AllBanner() {
       key: "bannerUrl",
       render: (imageSrc) => (
         <Image.PreviewGroup>
-          <Image src={imageSrc} width={80} height={80} />
+          <Image src={imageSrc} width={40} height={40} />
         </Image.PreviewGroup>
       ),
     },

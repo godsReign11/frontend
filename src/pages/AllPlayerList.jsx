@@ -66,7 +66,7 @@ export default function AllPlayerList() {
       key: "playerImage",
       render: (imageSrc) => (
         <Image.PreviewGroup>
-          <Image src={imageSrc} width={80} height={80} />
+          <Image src={imageSrc} width={20} height={20} />
         </Image.PreviewGroup>
       ),
     },

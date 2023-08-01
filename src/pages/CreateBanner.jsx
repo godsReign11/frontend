@@ -3,6 +3,10 @@ import "./All.css";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 import { BannerAPI } from "../Api/BannerAPI";
+import { Result, Modal } from 'antd';
+import { Link } from "react-router-dom";
+
+
 
 export default function CreateBanner() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -10,6 +14,8 @@ export default function CreateBanner() {
   const [bannerTitle, setBannerTitle] = useState("");
   const [bannerDescription, setBannerDescription] = useState("");
   const [bannerVideoURL, setBannerVideoURL] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const [error, setError] = useState(false);
 
@@ -53,6 +59,7 @@ export default function CreateBanner() {
         if (data.status) {
           toast.success("Banner Generated Successfully");
           console.log(data.message);
+          setIsModalOpen(true)
         } else {
           toast.error("Some Error Occured");
           console.log(data.message);
@@ -140,7 +147,7 @@ export default function CreateBanner() {
                     htmlFor="gameOrder"
                     className="text-lg font-medium text-gray-800 mb-0.2"
                   >
-                    Banner URL
+                    Video URL
                   </label>
                   <textarea
                     type="text"
@@ -168,6 +175,17 @@ export default function CreateBanner() {
           </div>
         </div>
       </div>
+      <Modal open={isModalOpen} footer={null} closable={false} closeIcon={false}>
+        <Result
+          status="success"
+          title="Successfully Created the Banner"
+          subTitle="Redirect to the All Banners"
+          extra={[
+
+          ]}>
+          <Link to='/all-banners' className="button-create-game">Yes, Please</Link>
+        </Result>
+      </Modal>
     </div>
   );
 }

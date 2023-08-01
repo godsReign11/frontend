@@ -25,6 +25,22 @@ export default function CreateContest() {
     getAllGamesDash();
   }, []);
 
+  const [teamCount, setTeamCount] = useState(2); // Initialize teamCount with 2 for Team A and Team B.
+  const [teamNames, setTeamNames] = useState(['Team A', 'Team B']); // Array to store team names
+  const [teamUrls, setTeamUrls] = useState(['', '']); // Array to store team URLs
+  const [teamScores, setTeamScores] = useState(['', '']); // Array to store team scores
+
+  const handleAddTeam = () => {
+    setTeamCount((prevCount) => prevCount + 1);
+  };
+
+  const handleDeleteTeam = (index) => {
+    setTeamNames((prevNames) => prevNames.filter((_, i) => i !== index));
+    setTeamUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
+    setTeamScores((prevScores) => prevScores.filter((_, i) => i !== index));
+    setTeamCount((prevCount) => prevCount - 1);
+  };
+
   const getAllGamesDash = () => {
     createGameApi.GetAllGames().then((data) => {
       if (data.status) {
@@ -131,121 +147,6 @@ export default function CreateContest() {
             </div>
           </div>
 
-          {/* Rest of the form input sections here... */}
-          <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
-            <div className="flex-1">
-              <div className="card bg-white rounded-lg shadow-md p-6">
-                <div className="mb-6">
-                  <label
-                    htmlFor="playerName"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team A Name
-                  </label>
-                  <input
-                    type="text"
-                    id="playerShortName"
-                    value={teamAname}
-                    required
-                    onChange={handleAllChange(setTeamAname)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team A URL"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label
-                    htmlFor="gameOrder"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team A URL
-                  </label>
-                  <input
-                    type="text"
-                    id="playerCategory"
-                    value={teamAurl}
-                    onChange={handleAllChange(setTeamAurl)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team A Url"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label
-                    htmlFor="gameOrder"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team A Score
-                  </label>
-                  <input
-                    type="text"
-                    id="playerCategory"
-                    value={teamAscore}
-                    onChange={handleAllChange(setTeamAscore)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team B Name"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex-1">
-              <div className="card bg-white rounded-lg shadow-md p-6">
-                <div className="mb-6">
-                  <label
-                    htmlFor="playerName"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team B Name
-                  </label>
-                  <input
-                    type="text"
-                    id="playerShortName"
-                    value={teamBname}
-                    required
-                    onChange={handleAllChange(setTeamBname)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team B Name"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label
-                    htmlFor="gameOrder"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team B URL
-                  </label>
-                  <input
-                    type="text"
-                    id="playerCategory"
-                    value={teamBurl}
-                    onChange={handleAllChange(setTeamBurl)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team B URL"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <label
-                    htmlFor="gameOrder"
-                    className="text-lg font-medium text-gray-800 mb-1"
-                  >
-                    Team B Score
-                  </label>
-                  <input
-                    type="text"
-                    id="playerCategory"
-                    value={teamBscore}
-                    onChange={handleAllChange(setTeamBscore)}
-                    className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
-                    placeholder="Enter the Team B Score"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
             <div className="flex-1">
               <div className="card bg-white rounded-lg shadow-md p-6">
@@ -343,6 +244,89 @@ export default function CreateContest() {
             </div>
           </div>
 
+          {/* Dynamic team cards */}
+          {Array.from({ length: teamCount }).map((_, index) => (
+            <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6" key={index}>
+              <div className="flex-1">
+                <div className="card bg-white rounded-lg shadow-md p-6">
+                  <div className="mb-6">
+                    <label
+                      htmlFor={`team${index + 1}Name`}
+                      className="text-lg font-medium text-gray-800 mb-1"
+                    >
+                      Team {String.fromCharCode(65 + index)} Name
+                    </label>
+                    <input
+                      type="text"
+                      id={`team${index + 1}Name`}
+                      value={teamNames[index]}
+                      onChange={(e) => {
+                        const updatedNames = [...teamNames];
+                        updatedNames[index] = e.target.value;
+                        setTeamNames(updatedNames);
+                      }}
+                      className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                      placeholder={`Enter the Team ${String.fromCharCode(65 + index)} Name`}
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <label
+                      htmlFor={`team${index + 1}Url`}
+                      className="text-lg font-medium text-gray-800 mb-1"
+                    >
+                      Team {String.fromCharCode(65 + index)} URL
+                    </label>
+                    <input
+                      type="text"
+                      id={`team${index + 1}Url`}
+                      value={teamUrls[index]}
+                      onChange={(e) => {
+                        const updatedUrls = [...teamUrls];
+                        updatedUrls[index] = e.target.value;
+                        setTeamUrls(updatedUrls);
+                      }}
+                      className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                      placeholder={`Enter the Team ${String.fromCharCode(65 + index)} URL`}
+                    />
+                  </div>
+
+                  <div className="mb-6">
+                    <label
+                      htmlFor={`team${index + 1}Score`}
+                      className="text-lg font-medium text-gray-800 mb-1"
+                    >
+                      Team {String.fromCharCode(65 + index)} Score
+                    </label>
+                    <input
+                      type="text"
+                      id={`team${index + 1}Score`}
+                      value={teamScores[index]}
+                      onChange={(e) => {
+                        const updatedScores = [...teamScores];
+                        updatedScores[index] = e.target.value;
+                        setTeamScores(updatedScores);
+                      }}
+                      className="input-field w-full px-4 py-2 border-gray-300 rounded-md focus:outline-none bg-slate-100 mt-4"
+                      placeholder={`Enter the Team ${String.fromCharCode(65 + index)} Score`}
+                    />
+                  </div>
+
+                  {/* "Delete Team" button */}
+                  {teamCount > 2 && (
+                    <button
+                      onClick={() => handleDeleteTeam(index)}
+                      className="button-primary px-6 py-2 rounded-md text-white bg-red-500 hover:bg-red-600"
+                    >
+                      Delete Team
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+
+
           <div className="flex mt-6 gap-3">
             <button
               onClick={handleCreateContest}
@@ -350,9 +334,16 @@ export default function CreateContest() {
             >
               Create Contest
             </button>
+            <button
+              onClick={handleAddTeam}
+              className="button-primary px-6 py-2 rounded-md text-white bg-green-500 hover:bg-green-600"
+            >
+              Add Team
+            </button>
           </div>
+
         </div>
       </div>
-    </div>
+    </div >
   );
 }
