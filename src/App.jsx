@@ -11,6 +11,7 @@ import AllContest from "./pages/AllContest";
 import CreateBanner from "./pages/CreateBanner";
 import AllBanner from "./pages/AllBanner";
 import AllUsers from "./pages/AllUsers";
+import SingleUserDetail from "./pages/SingleUserDetail";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/create-banner" element={<CreateBanner />} />
         <Route path="all-banners" element={<AllBanner />} />
         <Route path="all-users" element={<AllUsers />} />
+        <Route path='user_details' element={<SingleUserDetail />} />
 
         {/* <Route path="/settings" element={<Settings />} /> */}
         {/* <Route path="/build/:bID" element={<Build />} />

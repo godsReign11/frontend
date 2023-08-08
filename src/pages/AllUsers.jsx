@@ -2,25 +2,26 @@ import { useEffect, useState } from "react";
 import moment from "moment/moment";
 import { Table, Spin, Card, Image } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
 import TopHead from "./TopHead";
+import { allUsersAPI } from "../Api/UserAPI";
+import { Link } from "react-router-dom";
 
 
 export default function AllUsers() {
-  const [gamesData, setGameData] = useState([]);
+  const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllGamesDash();
+    getAllUserDetails();
   }, []);
 
-  const getAllGamesDash = () => {
-    createGameApi.GetAllGames().then((data) => {
+  const getAllUserDetails = () => {
+    allUsersAPI.ViewlAllUsersData().then((data) => {
       if (data.status) {
         toast.done(data.message);
         // console.log(data.data);
-        setGameData(data.data);
+        setUsersData(data.data);
         setIsLoading(false);
       } else {
         toast.error(data.message);
@@ -42,32 +43,90 @@ export default function AllUsers() {
       width: 80,
     },
     {
-      title: "Game Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Users ID",
+      dataIndex: "_id",
+      key: "_id",
+      render: (id) => (
+        <Link className="bg-gray-300 text-gray-950 py-1 px-2 rounded-md hover:text-gray-100 hover:bg-gray-950" to={`/user_details`} state={{ userId: id }}>
+          {id}
+        </Link>
+      ),
       width: 200,
     },
     {
-      title: "Created At",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      render: handleDate,
+      title: "User Name",
+      dataIndex: "userName",
+      key: "userName",
+      // render: handleDate,
       width: 150,
     },
     {
-      title: "Game Image",
-      dataIndex: "gameUrl",
-      key: "gameUrl",
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+      width: 120,
+    },
+
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+      width: 120,
+    },
+
+    {
+      title: "Profile Image",
+      dataIndex: "profileImage",
+      key: "profileImage",
       render: (imageSrc) => (
         <Image.PreviewGroup>
           <Image src={imageSrc} width={80} height={80} />
         </Image.PreviewGroup>
       ),
+      width: 120,
     },
+
     {
-      title: "Game Order",
-      dataIndex: "order",
-      key: "order",
+      title: "isActive",
+      dataIndex: "isActive",
+      key: "isActive",
+      render: (item) => (
+        item === true ? 'YES' : 'NO'
+      ),
+      width: 120,
+    },
+
+    {
+      title: "isBlock",
+      dataIndex: "isBlock",
+      key: "isBlock",
+      render: (item) => (
+        item === true ? 'YES' : 'NO'
+      ),
+      width: 120,
+    },
+
+
+    {
+      title: "isDeleted",
+      dataIndex: "isDeleted",
+      key: "isDeleted",
+      render: (item) => (
+        item === true ? 'YES' : 'NO'
+      ),
+      width: 120,
+    },
+
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: handleDate,
       width: 120,
     },
   ];
@@ -88,8 +147,8 @@ export default function AllUsers() {
             <Card className="table-card mt-6">
               <Table
                 columns={columns}
-                dataSource={gamesData}
-                rowKey={(game) => game.id}
+                dataSource={usersData}
+                rowKey={(user) => user.id}
                 pagination={false}
                 className="mt-6"
                 scroll={{ x: "max-content" }}
