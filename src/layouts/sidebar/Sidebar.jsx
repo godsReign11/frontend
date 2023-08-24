@@ -6,7 +6,7 @@ import { AiOutlineAppstore, AiFillCaretRight } from "react-icons/ai";
 import { GiTargetPoster } from "react-icons/gi";
 import { useMediaQuery } from "react-responsive";
 import { RiGamepadFill, RiUser4Fill } from "react-icons/ri";
-
+import { BiCategory } from 'react-icons/bi'
 import { TbPlayerEjectFilled, TbGoGame } from "react-icons/tb";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
@@ -63,7 +63,7 @@ const Sidebar = () => {
         animate={{ x: open ? 0 : -250 }}
         className="bg-white text-gray shadow-xl z-[999] max-w-[16rem] w-[16rem] overflow-hidden md:relative fixed h-screen top-0"
       >
-        <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300 mx-3">
+        <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300">
           {/* <img
             src="./Images/logo.png" //
             alt="logo"
@@ -71,7 +71,7 @@ const Sidebar = () => {
           /> */}
 
           <motion.span
-            className="text-xl font-bold whitespace-pre cursor-pointer"
+            className="text-xl font-bold whitespace-pre cursor-pointer ml-3"
             onClick={() => setOpen(!open)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -89,6 +89,7 @@ const Sidebar = () => {
                 Dashboard
               </NavLink>
             </li>
+
             <li>
               <motion.div
                 className="link cursor-pointer hover:bg-gray-200 "
@@ -97,8 +98,8 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
               >
-                <RiGamepadFill size={23} className="min-w-max" />
-                Game Manager
+                <BiCategory size={23} className="min-w-max" />
+                Ecommerce
               </motion.div>
               <AnimatePresence>
                 {gameManagerOpen && (
@@ -114,8 +115,8 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        Create Game
+                        <BiCategory size={20} className="min-w-max" />
+                        Order History
                       </NavLink>
                     </li>
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
@@ -124,14 +125,15 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        View All Games
+                        <BiCategory size={20} className="min-w-max" />
+                        Products
                       </NavLink>
                     </li>
                   </motion.ul>
                 )}
               </AnimatePresence>
             </li>
+
             <li>
               <motion.div
                 className="link cursor-pointer hover:bg-gray-200"
@@ -140,8 +142,8 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
               >
-                <TbPlayerEjectFilled size={23} className="min-w-max" />
-                Player Manager
+                <BiCategory size={23} className="min-w-max" />
+                E-Sports
               </motion.div>
               <AnimatePresence>
                 {playerManagerOpen && (
@@ -153,12 +155,12 @@ const Sidebar = () => {
                   >
                     <li className="hover:bg-gray-100 rounded-md mt-2 mb-1">
                       <NavLink
-                        to={"/create-player"}
+                        to={"/game-manager"}
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        Create Player
+                        <BiCategory size={20} className="min-w-max" />
+                        Games
                       </NavLink>
                     </li>
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
@@ -167,8 +169,19 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        All Player List
+                        <BiCategory size={20} className="min-w-max" />
+                        Players
+                      </NavLink>
+                    </li>
+
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/create-contest"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <BiCategory size={20} className="min-w-max" />
+                        Events
                       </NavLink>
                     </li>
                   </motion.ul>
@@ -186,8 +199,8 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
               >
-                <TbGoGame size={23} className="min-w-max" />
-                Contest Manager
+                <BiCategory size={23} className="min-w-max" />
+                Entertainment
               </motion.div>
               <AnimatePresence>
                 {contestManagerOpen && (
@@ -203,7 +216,7 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
+                        <BiCategory size={20} className="min-w-max" />
                         Create Contest
                       </NavLink>
                     </li>
@@ -213,7 +226,7 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
+                        <BiCategory size={20} className="min-w-max" />
                         All Contest List
                       </NavLink>
                     </li>
@@ -231,8 +244,8 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
               >
-                <GiTargetPoster size={23} className="min-w-max" />
-                Banner Manager
+                <BiCategory size={23} className="min-w-max" />
+                Accounts
               </motion.div>
               <AnimatePresence>
                 {bannerManagerOpen && (
@@ -248,7 +261,7 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
+                        <BiCategory size={20} className="min-w-max" />
                         Create Banner
                       </NavLink>
                     </li>
@@ -258,7 +271,7 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
+                        <BiCategory size={20} className="min-w-max" />
                         All Banner List
                       </NavLink>
                     </li>
@@ -276,8 +289,8 @@ const Sidebar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
               >
-                <RiUser4Fill size={23} className="min-w-max" />
-                User Manager
+                <BiCategory size={23} className="min-w-max" />
+                Accounts
               </motion.div>
               <AnimatePresence>
                 {userManagerOpen && (
@@ -293,8 +306,8 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        All Users
+                        <BiCategory size={20} className="min-w-max" />
+                        User Manager
                       </NavLink>
                     </li>
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
@@ -303,8 +316,8 @@ const Sidebar = () => {
                         className="link"
                         activeClassName="active-link"
                       >
-                        <AiFillCaretRight size={20} className="min-w-max" />
-                        ----
+                        <BiCategory size={20} className="min-w-max" />
+                        Settings
                       </NavLink>
                     </li>
                   </motion.ul>

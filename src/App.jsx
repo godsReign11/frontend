@@ -9,24 +9,28 @@ import AllPlayerList from "./pages/AllPlayerList";
 import CreateContest from "./pages/CreateContest";
 import AllContest from "./pages/AllContest";
 import CreateBanner from "./pages/CreateBanner";
-import AllBanner from "./pages/AllBanner";
 import AllUsers from "./pages/AllUsers";
 import SingleUserDetail from "./pages/SingleUserDetail";
+import GameComponent from "./layouts/Components/Game";
+import PlayerComponent from "./layouts/Components/Player";
+import EventComponent from "./layouts/Components/Event";
 
 const App = () => {
   return (
     <RootLayout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/game-manager" element={<CreateGame />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/all-games" element={<AllGames />} />
-        <Route path="/create-player" element={<CreatePlayer />} />
-        <Route path="/all-players" element={<AllPlayerList />} />
-        <Route path="/create-contest" element={<CreateContest />} />
-        <Route path="/all-contest" element={<AllContest />} />
+
+        <Route path="/game-manager" element={<GameComponent />} />
+
+        {/* <Route path="/all-games" element={<AllGames />} /> */}
+        <Route path="/create-player" element={<PlayerComponent />} />
+        {/* <Route path="/all-players" element={<AllPlayerList />} /> */}
+        <Route path="/create-contest" element={<EventComponent />} />
+        {/* <Route path="/all-contest" element={<AllContest />} /> */}
         <Route path="/create-banner" element={<CreateBanner />} />
-        <Route path="all-banners" element={<AllBanner />} />
+        {/* <Route path="all-banners" element={<AllBanner />} /> */}
         <Route path="all-users" element={<AllUsers />} />
         <Route path='user_details' element={<SingleUserDetail />} />
 

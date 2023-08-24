@@ -76,7 +76,6 @@ export default function AllGames() {
     <div className="wrapper">
       <div className="content-page rtl-page">
         <div className="container-fluid">
-          <TopHead name={"All Games"} />
 
           {isLoading ? (
             <Spin
