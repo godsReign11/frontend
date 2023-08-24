@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import moment from "moment/moment";
-import { Table, Spin, Card, Image } from "antd";
+import { Table, Spin, Card, Image, Switch } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
-import TopHead from "./TopHead";
 
 
 export default function AllGames() {
@@ -60,10 +59,28 @@ export default function AllGames() {
       key: "gameUrl",
       render: (imageSrc) => (
         <Image.PreviewGroup>
-          <Image src={imageSrc} width={80} height={80} loading="lazy" />
+          <Image src={imageSrc} width={40} height={40} loading="lazy" />
         </Image.PreviewGroup>
       ),
     },
+    {
+      title: 'Game Status',
+      dataIndex: 'gameStatus',
+      key: 'gameStatus',
+      render: () => (
+        <Switch defaultChecked />
+      )
+    },
+
+    {
+      title: 'Action',
+      dataIndex: 'gameStatus',
+      key: 'gameStatus',
+      render: () => (
+        <button className="text-sm bg-gray-200 p-2 rounded">Edit</button>
+      )
+    },
+
     {
       title: "Game Order",
       dataIndex: "order",

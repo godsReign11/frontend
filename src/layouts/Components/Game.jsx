@@ -7,7 +7,7 @@ import Active from '../../ExtraPages/ExGames/Active'
 import { useState } from 'react'
 
 const GameComponent = () => {
-  const [activeTab, setActiveTab] = useState('allGames'); // State to track the active tab
+  const [activeTab, setActiveTab] = useState('allGames');
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -16,7 +16,10 @@ const GameComponent = () => {
   return (
     <div>
       <CreateGame />
-      <div className='flex gap-8 ml-2 mt-5 text-sm'>
+
+      {/* Toggle Classes */}
+
+      <div className='flex gap-8 ml-2 mt-5 text-sm font-bold'>
         <h4 onClick={() => handleTabClick('allGames')} style={{ color: activeTab === 'allGames' ? 'black' : 'gray', cursor: 'pointer' }}>
           All Games
         </h4>

@@ -124,8 +124,7 @@ export default function CreateGame() {
 
   const handleCreateGameData = () => {
     if (
-      gameName === "" ||
-      gameOrder === ""
+      gameName === ""
     ) {
       setError(true);
     } else {
@@ -161,6 +160,10 @@ export default function CreateGame() {
     setSelectedFiles("");
   };
 
+  const handleModalFetch = () => {
+    
+  }
+
   return (
     <div className="wrapper">
       <ToastContainer />
@@ -191,7 +194,7 @@ export default function CreateGame() {
                   className={`input-field w-full px-4 py-2 border ${error && gameName === ""
                     ? "border-red-500"
                     : "border-gray-300"
-                    } rounded-md focus:outline-none bg-slate-100 mt-1`}
+                    } rounded-md focus:outline-none bg-slate-100 mt-1 h-11`}
                   placeholder="Enter the name of the game"
                 />
               </div>
@@ -266,11 +269,11 @@ export default function CreateGame() {
         <Result
           status="success"
           title="Successfully Created the Game"
-          subTitle="Redirect to the All Games"
+          subTitle="click to auto fetch"
           extra={[
 
           ]}>
-          <Link to='/all-games' className="button-create-game">Yes, Please</Link>
+          <button onClick={handleModalFetch} className="item-centre ml-[30%] justify-center w-[133px] h-11 px-6 py-3 rounded-lg border border-neutral-700  items-center hover:text-black">Yes, Please</button>
         </Result>
       </Modal>
     </div>

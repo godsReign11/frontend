@@ -1429,3 +1429,12 @@ legend {
   display: flex;
   align-items: center;
 }
+
+.input[type="file"] {
+  border: 2px solid #AAA;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin: 2px;
+    background: #DDD;
+    display: inline-block;
+}
