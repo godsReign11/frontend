@@ -161,7 +161,7 @@ export default function CreateGame() {
   };
 
   const handleModalFetch = () => {
-    
+
   }
 
   return (
@@ -174,7 +174,7 @@ export default function CreateGame() {
             <div>
               <h2 className="text-black text-base font-semibold leading-normal">List new Games</h2>
             </div>
-            <div className="flex flex-col mt-3 sm:flex-row sm:space-y-0 sm:space-x-6">
+            <div className="flex flex-col mt-1 sm:flex-row sm:space-y-0 sm:space-x-2">
 
               {/* Label 1 */}
               <div className="">
@@ -224,14 +224,14 @@ export default function CreateGame() {
               {/* Label 3 */}
 
               <div>
-                <div className="mb-1">
+                <div className="mb-1 main-create-game-div">
                   <label
                     htmlFor="upload"
                     className="text-gray-500 font-[14px]"
                   >
                     Choose Game Image
                   </label>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <input
                       id="file"
                       onChange={handleFileChange}

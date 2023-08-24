@@ -1430,11 +1430,14 @@ legend {
   align-items: center;
 }
 
-.input[type="file"] {
-  border: 2px solid #AAA;
-    border-radius: 4px;
-    padding: 2px 5px;
-    margin: 2px;
-    background: #DDD;
-    display: inline-block;
+.main-create-game-div input[type="file"] {
+  border-radius: 4px;
+  padding: 2px 5px;
+  display: inline-block;
+}
+
+.main-create-game-div input::file-selector-button {
+  color: #000;
+  border: 0px;
+  padding: 10px 15px;
 }
