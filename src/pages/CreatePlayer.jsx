@@ -4,7 +4,7 @@ import { createGameApi } from "../Api/GameApi";
 import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 
-export default function CreateGame() {
+export default function CreatePlayer() {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [playerName, setPlayerName] = useState("");
@@ -69,7 +69,7 @@ export default function CreateGame() {
       <ToastContainer />
       <div className="content-page rtl-page">
         <div className="container mx-auto">
-          <TopHead name={"Create Player"} />
+          <TopHead name={"Player"} />
 
           <div className="flex flex-col mt-6 space-y-6 sm:flex-row sm:space-y-0 sm:space-x-6">
             <div className="flex-1">

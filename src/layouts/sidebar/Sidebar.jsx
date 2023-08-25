@@ -165,7 +165,7 @@ const Sidebar = () => {
                     </li>
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
                       <NavLink
-                        to={"/all-players"}
+                        to={"/players-manager"}
                         className="link"
                         activeClassName="active-link"
                       >
