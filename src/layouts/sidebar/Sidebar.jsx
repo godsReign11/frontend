@@ -176,7 +176,7 @@ const Sidebar = () => {
 
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
                       <NavLink
-                        to={"/create-contest"}
+                        to={"/contest-manager"}
                         className="link"
                         activeClassName="active-link"
                       >

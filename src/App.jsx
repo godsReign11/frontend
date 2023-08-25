@@ -27,7 +27,7 @@ const App = () => {
         {/* <Route path="/all-games" element={<AllGames />} /> */}
         <Route path="/players-manager" element={<PlayerComponent />} />
         {/* <Route path="/all-players" element={<AllPlayerList />} /> */}
-        <Route path="/create-contest" element={<EventComponent />} />
+        <Route path="/contest-manager" element={<EventComponent />} />
         {/* <Route path="/all-contest" element={<AllContest />} /> */}
         <Route path="/create-banner" element={<CreateBanner />} />
         {/* <Route path="all-banners" element={<AllBanner />} /> */}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from "moment/moment";
-import { Table, Spin, Image } from "antd";
+import { Table, Spin, Image, Switch } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { createGameApi } from "../Api/GameApi";
 import { toast } from "react-toastify";
@@ -55,9 +55,12 @@ export default function AllPlayerList() {
       key: "playerShortName",
     },
     {
-      title: "Player Order",
+      title: "Status",
       dataIndex: "order",
       key: "order",
+      render: () => (
+        <Switch defaultChecked />
+      )
     },
 
     {

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const EventDrafts = () => {
+const EventActive = () => {
     return (
         <div>
-            Draft
+
         </div>
     )
 }
 
-export default EventDrafts;
+export default EventActive

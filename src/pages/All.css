@@ -1441,3 +1441,7 @@ legend {
   border: 0px;
   padding: 10px 15px;
 }
+
+.ant-spin-dot-item {
+  background-color: white !important;
+}
