@@ -76,7 +76,6 @@ export default function AllPlayerList() {
     <div className="wrapper">
       <div className="content-page rtl-page">
         <div className="container-fluid">
-          <TopHead name={"Players List"} />
 
           {isLoading ? (
             <Spin
@@ -86,7 +85,6 @@ export default function AllPlayerList() {
             />
           ) : (
             <div className="overflow-x-auto">
-              {/* Wrap the Table inside a div with overflow-x-auto class */}
               <Table
                 columns={columns}
                 dataSource={playersData}

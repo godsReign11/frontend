@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopHead from "./TopHead";
 import { createGameApi } from "../Api/GameApi";
 import { Result, Modal } from 'antd';
-import { GrFormAdd } from 'react-icons/gr'
-import { IconContext } from "react-icons";
+
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function CreateGame() {
@@ -199,27 +197,7 @@ export default function CreateGame() {
                 />
               </div>
 
-              {/* Label 2 */}
-
-              {/* <div className="mb-6">
-                <label
-                  htmlFor="gameOrder"
-                  className="text-lg font-medium text-gray-800 mb-1"
-                >
-                  Set Game Order
-                </label>
-                <input
-                  type="number"
-                  id="gameOrder"
-                  value={gameOrder}
-                  onChange={handleAllChange(setGameOrder)}
-                  className={`input-field w-full px-4 py-2 border ${error && gameOrder === ""
-                    ? "border-red-500"
-                    : "border-gray-300"
-                    } rounded-md focus:outline-none bg-slate-100 mt-4`}
-                  placeholder="Enter the game order"
-                />
-              </div> */}
+              
 
               {/* Label 3 */}
 
@@ -246,7 +224,7 @@ export default function CreateGame() {
                     </div>
 
                     <div className="mt-1">
-                      <button onClick={handleCreateGameData} className="w-[154px] h-11 px-6 py-2.5 bg-neutral-700 rounded-lg  items-center text-white">
+                      <button onClick={handleCreateGameData} className="w-[154px] h-11 px-6 py-2.5 bg-neutral-900 rounded-lg  items-center text-white">
                         <div className="flex gap-3">
                           <PlusOutlined color="white" className="mt-1" />
                           Add Game

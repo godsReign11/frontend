@@ -135,31 +135,13 @@ export default function CreatePlayer() {
                                         placeholder="Enter the player category"
                                     />
                                 </div>
+
                             </div>
                         </div>
 
                         <div className="flex-1">
                             <div className="card bg-white rounded-lg shadow-md p-6">
-                                <div className="mb-6">
-                                    <label
-                                        htmlFor="gameURL"
-                                        className="text-lg font-medium text-gray-800 mb-1"
-                                    >
-                                        Player Order
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="gameURL"
-                                        value={playerOrder}
-                                        required
-                                        onChange={handleAllChange(setPlayerOrder)}
-                                        className={`input-field w-full px-4 py-2 border rounded-md focus:outline-none bg-slate-100 mt-4 ${error && playerOrder === ""
-                                            ? "border-red-500"
-                                            : "border-gray-300"
-                                            }`}
-                                        placeholder="Enter Player Order"
-                                    />
-                                </div>
+                                
 
                                 <div className="mb-6">
                                     <label
