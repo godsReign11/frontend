@@ -14,6 +14,7 @@ import SingleUserDetail from "./pages/SingleUserDetail";
 import GameComponent from "./layouts/Components/Game";
 import PlayerComponent from "./layouts/Components/Player";
 import EventComponent from "./layouts/Components/Event";
+import CreateEvent from "./pages/CreateEvent";
 
 const App = () => {
   return (
@@ -24,11 +25,13 @@ const App = () => {
 
         <Route path="/game-manager" element={<GameComponent />} />
 
-        {/* <Route path="/all-games" element={<AllGames />} /> */}
         <Route path="/players-manager" element={<PlayerComponent />} />
-        {/* <Route path="/all-players" element={<AllPlayerList />} /> */}
-        <Route path="/contest-manager" element={<EventComponent />} />
-        {/* <Route path="/all-contest" element={<AllContest />} /> */}
+        
+        <Route path="/event-manager" element={<EventComponent />} />
+
+        <Route path="/create-event" element={<CreateEvent />} />
+
+        
         <Route path="/create-banner" element={<CreateBanner />} />
         {/* <Route path="all-banners" element={<AllBanner />} /> */}
         <Route path="all-users" element={<AllUsers />} />

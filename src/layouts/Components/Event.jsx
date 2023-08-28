@@ -6,9 +6,13 @@ import EventDrafts from '../../ExtraPages/ExGames/Drafts';
 import EventInactive from '../../ExtraPages/ExtraEvents/Inactive';
 import EventActive from '../../ExtraPages/ExtraEvents/Active';
 import TopHead from '../../pages/TopHead';
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import { Link } from 'react-router-dom';
 
 const EventComponent = () => {
   const [activeTab, setActiveTab] = useState('allContests');
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -34,7 +38,19 @@ const EventComponent = () => {
           </h4>
         </div>
 
-        
+        <div className="mt-1">
+          <Link
+            to='/create-event'
+            className={loadingButton ? "w-[195px] h-11 px-6 py-2.5 bg-neutral-900 rounded-lg  items-center text-white" : "w-[170px] h-11 px-6 py-2.5 bg-neutral-900 rounded-lg  items-center text-white"}
+          >
+              Add Event
+              {
+                loadingButton ? <Spin spinning='true' indicator={antIcon} /> : ''
+              }
+          </Link>
+        </div>
+
+
       </div>
 
       {/* Render components based on activeTab state */}

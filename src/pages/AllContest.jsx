@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CONTESTAPI } from "../Api/ContestApi";
-import TopHead from "./TopHead";
 import { Table, Spin, Image, Card } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
@@ -41,65 +40,9 @@ export default function AllContest() {
       key: "index",
       render: (_, record, index) => index + 1,
     },
-    {
-      title: "Player Name",
-      dataIndex: "playerName",
-      key: "playerName",
-    },
-    {
-      title: "Contest Game",
-      dataIndex: "contestGame",
-      key: "contestGame",
-    },
-    {
-      title: "Team A url",
-      dataIndex: "teamAurl",
-      key: "teamAurl",
-    },
-    {
-      title: "Team A Name",
-      dataIndex: "teamAname",
-      key: "teamAname",
-    },
 
     {
-      title: "Team A score",
-      dataIndex: "teamAscore",
-      key: "teamAscore",
-    },
-
-    {
-      title: "Team B Name",
-      dataIndex: "teamBname",
-      key: "teamBname",
-    },
-
-    {
-      title: "Team B Url",
-      dataIndex: "teamBurl",
-      key: "teamBurl",
-    },
-
-    {
-      title: "Team B Score",
-      dataIndex: "teamBscore",
-      key: "teamBscore",
-    },
-
-    {
-      title: "Start Date",
-      dataIndex: "startDate",
-      key: "startDate",
-      render: handleDate,
-    },
-
-    {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
-    },
-    {
-      title: "Contest Image",
+      title: "Event",
       dataIndex: "gameUrl",
       key: "gameUrl",
       render: (imageSrc) => (
@@ -108,6 +51,42 @@ export default function AllContest() {
         </Image.PreviewGroup>
       ),
     },
+
+    {
+      title: "Game",
+      dataIndex: "contestGame",
+      key: "contestGame",
+    },
+
+
+    {
+      title: "Start At",
+      dataIndex: "startDate",
+      key: "startDate",
+      render: handleDate,
+    },
+
+    {
+      title: "Teams",
+      dataIndex: "playerName",
+      key: "playerName",
+    },
+
+    {
+      title: "Comments",
+      dataIndex: "playerName",
+      key: "playerName",
+    },
+
+    {
+      title: "Actions",
+      dataIndex: "playerName",
+      key: "playerName",
+    },
+
+    // 
+    
+
 
     // {
     //   title: "Contest Url",
