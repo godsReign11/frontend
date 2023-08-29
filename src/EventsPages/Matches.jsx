@@ -97,7 +97,7 @@ export default function EventMatches() {
                                 </h2>
                                 <div className="">
                                     <button
-                                        className="w-[195px] h-11 px-6 py-2.5 bg-white  rounded-lg  items-center  text-black border  border-neutral-700"
+                                        className="px-6 py-2.5 bg-white  rounded-lg  items-center  text-black border  border-neutral-700"
                                     >
                                         Add Matches
                                     </button>
