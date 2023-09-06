@@ -217,17 +217,57 @@ const Sidebar = () => {
                         activeClassName="active-link"
                       >
                         <BiCategory size={20} className="min-w-max" />
-                        Create Contest
+                        Promo Banners
                       </NavLink>
                     </li>
                     <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
                       <NavLink
-                        to={"/all-contest"}
+                        to={"/create-videos"}
                         className="link"
                         activeClassName="active-link"
                       >
                         <BiCategory size={20} className="min-w-max" />
-                        All Contest List
+                        Videos
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <BiCategory size={20} className="min-w-max" />
+                        Web Shows
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <BiCategory size={20} className="min-w-max" />
+                        Music
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <BiCategory size={20} className="min-w-max" />
+                        Live Streams
+                      </NavLink>
+                    </li>
+                    <li className="hover:bg-gray-100 rounded-md mt-1 mb-2">
+                      <NavLink
+                        to={"/"}
+                        className="link"
+                        activeClassName="active-link"
+                      >
+                        <BiCategory size={20} className="min-w-max" />
+                        Clips
                       </NavLink>
                     </li>
                   </motion.ul>
