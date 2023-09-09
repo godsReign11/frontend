@@ -1,30 +1,88 @@
 import React, { useState } from "react";
 import '../pages/All.css'
 import { Radio } from 'antd';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import TopHead from "./TopHead";
 import { FcVideoFile, FcAddImage } from 'react-icons/fc'
+import { VideosAPI } from "../Api/VideosAPI";
 
 export default function CreateVideos() {
-
   const [playerName, setPlayerName] = useState("");
   const [error, setError] = useState(false);
+  const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [madeForKids, setMadeForKids] = useState(false);
+  const [adultConfirm, setAdultConfirm] = useState(false);
+  const [videoUpload, setVideoUpload] = useState(null); // State for video input
+  const [thumbnailUpload, setThumbnailUpload] = useState(null); // State for thumbnail input
+
   const handleAllChange = (setterFunction) => (e) => {
     const { value } = e.target;
     setterFunction(value);
   };
 
-  const [value, setValue] = useState(1);
-  const onChange = (e) => {
-    console.log('radio checked', e.target.value);
-    setValue(e.target.value);
+  const handleVideoInputChange = (e) => {
+    const file = e.target.files[0];
+    setVideoUpload(file);
   };
 
-  const [secondValue, setSecondValue] = useState(1);
-  const onChangeValue = (e) => {
-    console.log('radio checked', e.target.value);
-    setSecondValue(e.target.value);
+  const handleThumbnailInputChange = (e) => {
+    const file = e.target.files[0];
+    setThumbnailUpload(file);
   };
+
+  const onChange = (e) => {
+    setMadeForKids(e.target.value);
+  };
+
+  const onChangeValue = (e) => {
+    setAdultConfirm(e.target.value);
+  };
+
+  const handleVideoPOSTAPI = () => {
+    if (
+      category === "" ||
+      title === "" ||
+      description === ""
+    ) {
+      setError(true);
+    } else {
+      setError(false);
+
+      const dataForm = new FormData();
+      dataForm.append("category", category);
+      dataForm.append("description", description);
+      dataForm.append("subtitle", subtitle);
+
+      if (videoUpload) {
+        dataForm.append('files', videoUpload, 'video.mp4'); // Append video with a specific name
+      }
+
+      if (thumbnailUpload) {
+        dataForm.append('files', thumbnailUpload, 'thumbnail.jpg'); // Append thumbnail with a specific name
+      }
+
+      dataForm.append("isDraft", false);
+      dataForm.append("isKid", madeForKids);
+      dataForm.append("isAgeRestrict", adultConfirm);
+
+      VideosAPI.CreateVideos(dataForm).then((data) => {
+        if (data.status) {
+          toast.success("Video Generated Successfully");
+          console.log(data.message);
+        } else {
+          toast.error("Some Error Occurred");
+          console.log(data.message);
+        }
+      });
+    }
+  }
+
+
+
+
 
   return (
     <div className="wrapper">
@@ -50,16 +108,20 @@ export default function CreateVideos() {
                 >
                   Select Category
                 </label>
-                <input
-                  type="text"
+                <select
+                  value={category}
                   required
-                  onChange={handleAllChange(setPlayerName)}
+                  onChange={handleAllChange(setCategory)}
                   className={`input-field w-full px-4 py-2 border ${error && playerName === ""
                     ? "border-red-500"
                     : "border-gray-300"
                     } rounded-md focus:outline-none bg-gray-50 mt-1 h-11`}
                   placeholder="Enter the name of the player"
-                />
+                >
+                  <option value=''>Select</option>
+                  <option value='video'>Video</option>
+                  <option value='vlogs'>Vlogs</option>
+                </select>
               </div>
 
               <div className="mt-2">
@@ -72,7 +134,8 @@ export default function CreateVideos() {
                 <input
                   type="text"
                   required
-                  onChange={handleAllChange(setPlayerName)}
+                  value={title}
+                  onChange={handleAllChange(setTitle)}
                   className={`input-field w-full px-4 py-2 border ${error && playerName === ""
                     ? "border-red-500"
                     : "border-gray-300"
@@ -89,9 +152,10 @@ export default function CreateVideos() {
                   Subtitle
                 </label>
                 <input
+                  value={subtitle}
                   type="text"
                   required
-                  onChange={handleAllChange(setPlayerName)}
+                  onChange={handleAllChange(setSubtitle)}
                   className={`input-field w-full px-4 py-2 border ${error && playerName === ""
                     ? "border-red-500"
                     : "border-gray-300"
@@ -103,13 +167,14 @@ export default function CreateVideos() {
 
             <div className="mt-3">
               <label
-                htmlFor="gameName"
+
+                value={description}
                 className="text-gray-900 font-[12px] font-bold"
                 placeholder="Enter Description"
               >
                 Description
               </label>
-              <textarea className="input-field w-[600px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1" />
+              <textarea onChange={handleAllChange(setDescription)} className="input-field w-[600px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1" />
             </div>
           </div>
 
@@ -119,15 +184,19 @@ export default function CreateVideos() {
             <div className="">
               <div className="mt-3 flex flex-col">
                 <label
-                  htmlFor="gameName"
+                  htmlFor="videoUpload"
                   className="text-gray-900 font-[12px] font-bold"
-                  placeholder="Enter Description"
                 >
                   Upload Video
                 </label>
                 <div>
-                  <input type="file" className="input-field w-[250px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1" />
-
+                  <input
+                    type="file"
+                    id="videoUpload"
+                    accept="video/*"
+                    onChange={handleVideoInputChange}
+                    className="input-field w-[250px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1"
+                  />
                 </div>
               </div>
             </div>
@@ -135,15 +204,19 @@ export default function CreateVideos() {
             <div className="">
               <div className="mt-3 flex flex-col">
                 <label
-                  htmlFor="gameName"
+                  htmlFor="thumbnailUpload"
                   className="text-gray-900 font-[12px] font-bold"
-                  placeholder="Enter Description"
                 >
                   Upload Thumbnail
                 </label>
                 <div className="flex gap-8">
-                  <input type="file" className="input-field w-[250px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1" />
-
+                  <input
+                    type="file"
+                    id="thumbnailUpload"
+                    accept="image/*"
+                    onChange={handleThumbnailInputChange}
+                    className="input-field w-[250px] h-[200px]  px-4 py-2 border rounded-md focus:outline-none bg-gray-50 mt-1"
+                  />
                   {/* Kids Relevance */}
 
                   <div className="">
@@ -159,24 +232,23 @@ export default function CreateVideos() {
                       <div>
                         {/* first */}
                         <div>
-                          <Radio.Group onChange={onChange} value={value}>
-                            <Radio value={1}>Yes</Radio>
-                            <Radio value={2}>No</Radio>
+                          <Radio.Group onChange={onChange} value={madeForKids}>
+                            <Radio value={true}>Yes</Radio>
+                            <Radio value={false}>No</Radio>
                           </Radio.Group>
                         </div>
                         {/* Seconds */}
                         <div className="mt-7">
                           <label
-                            htmlFor="gameName"
                             className="text-gray-700 font-[8px] font-semibold"
                           >
                             Do you want to restrict your video to an adult audience?
                           </label>
 
                           <div className="flex flex-row">
-                            <Radio.Group onChange={onChangeValue} value={secondValue} className="mt-3">
-                              <Radio className="font-[8px]" secondValue={1}>Yes, restrict my video to viewers over 18</Radio>
-                              <Radio className="font-[8px] mt-2" secondValue={2}>No, don't restrict my video to viewers over 18 only</Radio>
+                            <Radio.Group onChange={onChangeValue} value={adultConfirm} className="mt-3">
+                              <Radio className="font-[8px]" value={true}>Yes, restrict my video to viewers over 18</Radio>
+                              <Radio className="font-[8px] mt-2" value={false}>No, don't restrict my video to viewers over 18 only</Radio>
                             </Radio.Group>
                           </div>
                         </div>
@@ -200,7 +272,7 @@ export default function CreateVideos() {
           </button>
         </div>
 
-        <div className="w-[175px] h-11 px-[34px] py-3 bg-gray-900 rounded-lg justify-start items-center gap-2.5 inline-flex text-white">
+        <div onClick={handleVideoPOSTAPI} className="w-[175px] h-11 px-[34px] py-3 bg-gray-900 rounded-lg justify-start items-center gap-2.5 inline-flex text-white">
           <button>
             Create Videos
           </button>
