@@ -41,6 +41,10 @@ export default function CreateVideos() {
     setAdultConfirm(e.target.value);
   };
 
+  const getValue = () => {
+    console.log(videoUpload);
+  }
+
   const handleVideoPOSTAPI = () => {
     if (
       category === "" ||
