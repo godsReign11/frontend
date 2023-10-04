@@ -100,7 +100,7 @@ export default function CreateVideos() {
           </h2>
         </div>
 
-        {/* Maun Div */}
+        {/* Main Div */}
         <div>
           <div className="flex gap-6 items-center ">
             <div className="mt-1 sm:flex-row sm:space-y-0">
