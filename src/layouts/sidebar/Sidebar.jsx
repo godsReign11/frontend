@@ -3,11 +3,8 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineAppstore, AiFillCaretRight } from "react-icons/ai";
-import { GiTargetPoster } from "react-icons/gi";
 import { useMediaQuery } from "react-responsive";
-import { RiGamepadFill, RiUser4Fill } from "react-icons/ri";
 import { BiCategory } from 'react-icons/bi'
-import { TbPlayerEjectFilled, TbGoGame } from "react-icons/tb";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -90,7 +87,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            <li>
+            {/* <li>
               <motion.div
                 className="link cursor-pointer hover:bg-gray-200 "
                 onClick={toggleGameManager}
@@ -132,7 +129,7 @@ const Sidebar = () => {
                   </motion.ul>
                 )}
               </AnimatePresence>
-            </li>
+            </li> */}
 
             <li>
               <motion.div
